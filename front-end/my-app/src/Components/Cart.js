@@ -112,7 +112,7 @@ export const Cart = () => {
         <p>Your cart is empty.</p>
       ) : (
         <div>
-          {cart.map((item, index) => (
+          {cart.map((item) => (
             <CartItem key={item._id} item={item} onPriceUpdate={handlePriceUpdate} onRemove={handleRemoveItem} onUpdateQuantity={handleUpdateQuantity} />
           ))}
         </div>

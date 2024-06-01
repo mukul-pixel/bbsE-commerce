@@ -65,10 +65,10 @@ const handleChange = (e) => {
   }));
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = () => {
   axios.put(`http://localhost:5000/edit/${selectedProduct._id}`, selectedProduct)
       .then(response => {
-          alert('Product updated successfully');
+          alert('Product updated successfully',response);
       })
       .catch(error => {
           console.error('Error updating product', error);
