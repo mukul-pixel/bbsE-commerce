@@ -99,7 +99,7 @@ export const Cart = () => {
 
   return (
     <>
-    {/* // <div className="container p-3"> */}
+    <div className="d-none">{initialQuantities}</div>
     <div className="text-center border-top border-bottom fs-2 p-1 fw-bold ">
           Cart
         </div>

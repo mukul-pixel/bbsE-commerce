@@ -5,28 +5,29 @@ import { NavLink } from 'react-router-dom';
 export const Profile = () => {
     const [formData,setFormData] = useState({});
   const [loginError,setLoginError] = useState("");
-  let userId = localStorage.getItem('userId');
-
-  const fetchUserData = async (userId) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
-      const userData = response.data;
-      if(!userData.error){
-        setFormData(userData);
-      }else{
-        setLoginError("nodata");
-      }
-      // console.log(userData);
-
-    } catch (err) {
-      console.error("Error fetching user data:", err);
-    }
-  };
+  
   useEffect(() => {
+    let userId = localStorage.getItem('userId');
+    const fetchUserData = async (userId) => {
+      try {
+        const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
+        const userData = response.data;
+        if(!userData.error){
+          setFormData(userData);
+        }else{
+          setLoginError("nodata");
+        }
+  
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+      }
+    };
+
     fetchUserData(userId);
   }, []);
   return (
     <>
+    <div className='d-none'>{loginError}</div>
       {Object.keys(formData).length === 0?
       (<div className='parent d-flex justify-content-center vh-100'>
       <div className='child fs-3'>Please login yourself to see the profile section !</div>

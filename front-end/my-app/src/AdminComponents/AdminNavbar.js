@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -12,11 +12,11 @@ import { Link, NavLink } from "react-router-dom";
 import logoImage from "../../src/images/dcd1ad97-eb2e-4bdf-afb2-aa66482dd1d3.svg";
 
 export const AdminNavbar = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  let sidebarOpen = true;
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
   return (
     <>
       <div className="row p-0 vh-100">

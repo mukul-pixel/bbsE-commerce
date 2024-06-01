@@ -109,7 +109,7 @@ export const ViewUser = () => {
                 <button type="button" className="btn-close" onClick={closeModal}></button>
               </div>
               <div className="modal-body">
-                <p><img src={selectedUser.imageSrc} style={{borderRadius:"50%", height:"110px", width:"110px"}}/></p>
+                <p><img src={selectedUser.imageSrc} alt='profile' style={{borderRadius:"50%", height:"110px", width:"110px"}}/></p>
                 <p><strong>Name:</strong> {selectedUser.name}</p>
                 <p><strong>Email:</strong> {selectedUser.mail}</p>
                 <p><strong>Location:</strong> {selectedUser.location}</p>

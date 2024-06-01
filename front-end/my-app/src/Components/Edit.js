@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export const Edit = () => {
@@ -15,27 +15,27 @@ export const Edit = () => {
     const[imageSrc,setImageSrc] = useState(formData.imageSrc);
     let userId = localStorage.getItem('userId');
 
-    const fetchUserData = async (userId) => {
-        try {
-          const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
-          const userData = response.data;
-          if(!userData.error){
-            setFormData(userData);
-            setName(userData.name);
-            setMail(userData.mail);
-            setLocations(userData.location);
-            setContact(userData.contact);
-            setImageSrc(userData.imageSrc);
-          }else{
-            setLoginError("nodata");
-          }
-          // console.log(userData);
     
-        } catch (err) {
-          console.error("Error fetching user data:", err);
-        }
-      };
-      useEffect(() => {
+      useEffect((userId) => {
+        const fetchUserData = async (userId) => {
+          try {
+            const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
+            const userData = response.data;
+            if(!userData.error){
+              setFormData(userData);
+              setName(userData.name);
+              setMail(userData.mail);
+              setLocations(userData.location);
+              setContact(userData.contact);
+              setImageSrc(userData.imageSrc);
+            }else{
+              setLoginError("nodata");
+            }
+      
+          } catch (err) {
+            console.error("Error fetching user data:", err);
+          }
+        };
         fetchUserData(userId);
       }, []);
 
@@ -75,6 +75,7 @@ export const Edit = () => {
         }
   return (
     <>
+    <div className='d-none'>{loginError}</div>
     <div className='row bg-black p-4'>
         <div className='col-md-6 text-white'>
             <h3>PERSONAL</h3>

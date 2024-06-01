@@ -75,8 +75,10 @@ export const ProductInfo = () => {
         // Handle error or show error message to the user
       }
     };
-
-    // Function to fetch user information by ID
+  
+    // Fetch user information for each review's user ID
+    useEffect((userInfoMap) => {
+       // Function to fetch user information by ID
     const userInformation = async (userId) => {
       try {
         if (!userInfoMap.has(userId)) {
@@ -88,9 +90,7 @@ export const ProductInfo = () => {
         console.error('Error fetching user information:', error);
       }
     };
-  
-    // Fetch user information for each review's user ID
-    useEffect(() => {
+
       reviews.forEach(review => {
         userInformation(review.userId);
       });

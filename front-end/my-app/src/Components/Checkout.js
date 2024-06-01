@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { faIndianRupee, faLocation, faLocationDot, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import { faIndianRupee, faLocationDot, faTruckFast } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 export const Checkout = () => {
   const location = useLocation();
@@ -25,7 +25,7 @@ export const Checkout = () => {
     ccCVV: ''
 });
 
-const [validated, setValidated] = useState(false);
+// const [validated, setValidated] = useState(false);
 
 const handleChange = (event) => {
     const { id, value } = event.target;
@@ -46,11 +46,11 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-        setValidated(true);
-        return;
-    }
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //     setValidated(true);
+    //     return;
+    // }
 
     const orderId = generateOrderId();
       const orderData = {

@@ -18,7 +18,7 @@ export const Navbars = () => {
   let navigate = useNavigate();
   // const token = localStorage.getItem('token');
 
-   useEffect(() => {
+   useEffect((handleLogout) => {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     const userId = localStorage.getItem('userId');
