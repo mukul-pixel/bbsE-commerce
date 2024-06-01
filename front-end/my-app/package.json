@@ -26,11 +26,11 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "install": "cd front-end/my-app && npm install",
-    "build": "cd front-end/my-app && npm run build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "cd my-app && npm start",
+    "install": "cd my-app && npm install",
+    "build": "cd my-app && npm run build",
+    "test": "cd my-app && npm test",
+    "eject": "cd my-app && npm run eject"
   },
   "eslintConfig": {
     "extends": [
