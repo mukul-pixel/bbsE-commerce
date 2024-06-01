@@ -1,0 +1,13 @@
+{
+    "name": "root-config",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "start": "cd front-end/my-app && npm start",
+      "install": "cd front-end/my-app && npm install",
+      "build": "cd front-end/my-app && npm run build",
+      "test": "cd front-end/my-app && npm test",
+      "eject": "cd front-end/my-app && npm run eject"
+    }
+  }
+  
