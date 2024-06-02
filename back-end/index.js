@@ -9,10 +9,11 @@ const path = require('path');
 const Product = require("./models/productModel");
 const Review = require('./models/reviewModel');
 const Cart = require("./models/cartModel");
+const { MongoClient } = require('mongodb');
 require("dotenv").config();
 const PORT = 5000;
 const MONGO_URI =process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bbs";
-
+const client = new MongoClient(process.env.MONGO_URI);
 
 const app = express();
 app.use(express.json());
@@ -27,8 +28,13 @@ const connection = ()=>{
     console.log("failed to connect with database");
 })
 }
-
 connection();
+
+function getDb(dbName = process.env.DB_NAME) {
+  return client.db(dbName);
+}
+
+module.exports = { getDb };
 
 //api for login
 app.post("/login",async (req,res)=>{
