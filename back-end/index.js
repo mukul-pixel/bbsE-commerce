@@ -9,8 +9,9 @@ const path = require('path');
 const Product = require("./models/productModel");
 const Review = require('./models/reviewModel');
 const Cart = require("./models/cartModel");
-const PORT = 5000;
-const MONGO_URI ="mongodb://127.0.0.1:27017/bbs";
+require("dotenv").config();
+const PORT = process.env.PORT || 5000;
+const MONGO_URI =process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bbs";
 
 
 const app = express();

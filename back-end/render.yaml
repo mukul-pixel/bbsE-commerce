@@ -2,9 +2,9 @@ services:
   - name: mongodb
     env:
       - key: MONGO_INITDB_ROOT_USERNAME
-        value: mukul8756@gmail.com
+        value: mukul8756
       - key: MONGO_INITDB_ROOT_PASSWORD
-        value: Chandrikavijaykhatri1
+        value: DCskoU8vOjZpmaww
     plan: starter
     buildCommand: docker pull mongo:latest
     startCommand: docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME -e MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD mongo:latest
