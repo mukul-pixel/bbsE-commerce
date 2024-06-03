@@ -66,7 +66,7 @@ const handleChange = (e) => {
 };
 
 const handleSubmit = () => {
-  axios.put(`http://localhost:5000/edit/${selectedProduct._id}`, selectedProduct)
+  axios.put(`https://bbse-commerce.onrender.com/edit/${selectedProduct._id}`, selectedProduct)
       .then(response => {
           alert('Product updated successfully',response);
       })

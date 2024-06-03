@@ -13,7 +13,7 @@ export const Products = () => {
 
     const getImage = async ()=>{
         try{
-        const response = await axios.get("http://localhost:5000/getProduct");
+        const response = await axios.get("https://bbse-commerce.onrender.com/getProduct");
         if (response.data.status === "ok") {
           // Extract product data from the response
           const products = response.data.data;
@@ -148,7 +148,7 @@ export const Products = () => {
         sortedProducts.map((data, index) => (
           <div key={index+1} className="card col-md-2 col-6 px-0 mx-md-4 my-md-2 my-3" style={{aspectRatio:"1/1"}}>
             {data.images.length > 0 && (
-              <img src={`http://localhost:5000/Images/${data.images[0]}`} className="card-img-top" style={{aspectRatio:"1/1"}} alt="Product" />
+              <img src={`https://bbse-commerce.onrender.com/Images/${data.images[0]}`} className="card-img-top" style={{aspectRatio:"1/1"}} alt="Product" />
             )}
             <div className="card-body">
               <span>{data.productPrice}</span>

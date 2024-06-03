@@ -19,7 +19,7 @@ export const Edit = () => {
       useEffect((userId) => {
         const fetchUserData = async (userId) => {
           try {
-            const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
+            const response = await axios.get(`https://bbse-commerce.onrender.com/profile?userId=${userId}`);
             const userData = response.data;
             if(!userData.error){
               setFormData(userData);
@@ -56,7 +56,7 @@ export const Edit = () => {
         e.preventDefault();
         console.log({name,mail,contact,location,imageSrc,userId});
         try{
-            const response = await axios.put("http://localhost:5000/edit", {
+            const response = await axios.put("https://bbse-commerce.onrender.com/edit", {
             name,
             mail,
             location,

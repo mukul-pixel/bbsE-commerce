@@ -9,7 +9,7 @@ export const ViewUser = () => {
     useEffect(()=>{
       const getUsers = async ()=>{
         try{
-        const response = await axios.get("http://localhost:5000/getUsers");
+        const response = await axios.get("https://bbse-commerce.onrender.com/getUsers");
         if (response.data.status === "ok") {
           // Extract product data from the response
           const users = response.data.data;

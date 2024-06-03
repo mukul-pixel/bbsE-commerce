@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { faIndianRupee, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const API_URL = 'http://localhost:5000/cart';
+const API_URL = 'https://bbse-commerce.onrender.com/cart';
 
 export const CartItem = ({item, onPriceUpdate, onRemove, onUpdateQuantity}) => {
     const [cartProduct, setCartProduct] = useState(null);
@@ -14,7 +14,7 @@ export const CartItem = ({item, onPriceUpdate, onRemove, onUpdateQuantity}) => {
     useEffect(() => {
       async function fetchProductDetails(productId) {
         try {
-          const response = await axios.get(`http://localhost:5000/products/${productId}`);
+          const response = await axios.get(`https://bbse-commerce.onrender.com/products/${productId}`);
           const productData = response.data;
           setCartProduct(productData);
           // Update the price once the product data is fetched
@@ -55,7 +55,7 @@ export const CartItem = ({item, onPriceUpdate, onRemove, onUpdateQuantity}) => {
     return (
       <>
       <div className={`row border my-2 mx-2 p-2 ${isHidden ? 'hidden' : ''}`}>
-        <div className='col-md-4 col-4 my-auto'><img src={`http://localhost:5000/Images/${cartProduct.images[0]}`} className="p-2 h-75 w-50" alt={cartProduct.productName} /></div>
+        <div className='col-md-4 col-4 my-auto'><img src={`https://bbse-commerce.onrender.com/Images/${cartProduct.images[0]}`} className="p-2 h-75 w-50" alt={cartProduct.productName} /></div>
         <div className="col-md-5 col-5">
           <h5 className="fw-bold">{cartProduct.productName}</h5>
           <p className='p-0 m-0'>{cartProduct.productDescription}</p>

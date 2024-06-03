@@ -67,7 +67,7 @@ export const ProductInfo = () => {
       try {
         console.log(productId);
         // Send POST request to add product to cart
-        const response = await axios.post('http://localhost:5000/addToCart', { productId, userId });
+        const response = await axios.post('https://bbse-commerce.onrender.com/addToCart', { productId, userId });
         console.log('Product added to cart:', response.data);
         // Handle success or update UI accordingly
       } catch (error) {
@@ -82,7 +82,7 @@ export const ProductInfo = () => {
     const userInformation = async (userId) => {
       try {
         if (!userInfoMap.has(userId)) {
-          const response = await axios.get(`http://localhost:5000/userInfo/${userId}`);
+          const response = await axios.get(`https://bbse-commerce.onrender.com/userInfo/${userId}`);
           const userData = response.data;
           setUserInfoMap(prevMap => new Map(prevMap.set(userId, userData)));
         }
@@ -115,7 +115,7 @@ export const ProductInfo = () => {
         reviewMessage,
       };
 
-      const response = await axios.post('http://localhost:5000/addReview', postData);
+      const response = await axios.post('https://bbse-commerce.onrender.com/addReview', postData);
       console.log('Response from backend:', response.data);
 
       toggleModal();
@@ -138,7 +138,7 @@ export const ProductInfo = () => {
     
     const getReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/reviews?productId=${productId}`);
+        const response = await axios.get(`https://bbse-commerce.onrender.com/reviews?productId=${productId}`);
         setReviews(response.data);
       } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -189,7 +189,7 @@ export const ProductInfo = () => {
                 {product.images.map((image, index) => (
                   <img
                     key={index}
-                    src={`http://localhost:5000/Images/${image}`}
+                    src={`https://bbse-commerce.onrender.com/Images/${image}`}
                     alt={`Product pic ${index + 1}`}
                     className="img-fluid py-2"
                     onClick={() => handleImageChange(image)}
@@ -204,7 +204,7 @@ export const ProductInfo = () => {
               >
                 <img
                     id='productImg'
-                    src={imageUrl?`http://localhost:5000/Images/${imageUrl}`:`http://localhost:5000/Images/${product.images[0]}`}
+                    src={imageUrl?`https://bbse-commerce.onrender.com/Images/${imageUrl}`:`https://bbse-commerce.onrender.com/Images/${product.images[0]}`}
                     alt="Zoomable pic"
                     className={isHovered ? 'zoomed' : ''}
                     onMouseEnter={() => setIsHovered(true)}

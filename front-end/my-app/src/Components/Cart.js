@@ -18,7 +18,7 @@ export const Cart = () => {
     async function fetchCart() {
       const userId = localStorage.getItem('userId');
       try {
-        const response = await axios.get(`http://localhost:5000/cart?userId=${userId}`);
+        const response = await axios.get(`https://bbse-commerce.onrender.com/cart?userId=${userId}`);
         const cartData = response.data;
         setCart(cartData);
 
@@ -37,7 +37,7 @@ export const Cart = () => {
   useEffect(() => {
     async function fetchProductDetails() {
       const productIds = cart.map(item => item.productId);
-      const requests = productIds.map(productId => axios.get(`http://localhost:5000/products/${productId}`));
+      const requests = productIds.map(productId => axios.get(`https://bbse-commerce.onrender.com/products/${productId}`));
       try {
         const responses = await Promise.all(requests);
         const productDetails = responses.map(response => response.data);

@@ -27,7 +27,7 @@ export const Login = () => {
     }
 
     try{
-        axios.post("http://localhost:5000/login",
+        axios.post("https://bbse-commerce.onrender.com/login",
         {mail,password}
       )
       .then(res=>{

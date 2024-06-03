@@ -10,7 +10,7 @@ export const Profile = () => {
     let userId = localStorage.getItem('userId');
     const fetchUserData = async (userId) => {
       try {
-        const response = await axios.get(`http://localhost:5000/profile?userId=${userId}`);
+        const response = await axios.get(`https://bbse-commerce.onrender.com/profile?userId=${userId}`);
         const userData = response.data;
         if(!userData.error){
           setFormData(userData);
