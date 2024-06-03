@@ -105,7 +105,7 @@ export const Register = () => {
     const backend = (formData) => {
       const { name, mail, contact, password } = formData;
     
-      axios.post("http://localhost:5000/register", { name, mail, contact, password })
+      axios.post("https://bbse-commerce.onrender.com/register", { name, mail, contact, password })
         .then(result => {
           if (result.data.message === "exists") {
             toast.error('User Already Exists. Please login.');
