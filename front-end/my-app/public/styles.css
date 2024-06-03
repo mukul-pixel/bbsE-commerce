@@ -53,7 +53,6 @@ body{
   }
   
   .contentFromCustomer{
-    width: 30%;
     margin-right: 1%;
     border: 1px solid #e0e0e0;
     color: #463c3c;
@@ -418,8 +417,8 @@ body{
 .foot_subleft {
   -ms-flex: 0 0 540px;
   flex: 0 0 540px;
-  max-width: 540px;
   padding-right: 55px;
+  max-width: 540px;
   display: table-cell;
   vertical-align: middle
 }
@@ -446,7 +445,7 @@ body{
 
 .subform {
   position: relative;
-  padding-right: 310px
+  /* padding-right: 310px */
 }
 
 .subform input[type=email],
@@ -539,8 +538,8 @@ input[type=submit] {
     font-size: 15px;
     height: 40px;
     line-height: 40px;
-    font-weight: 500;
-    padding: 0 38px;
+    font-weight: 400;
+    padding: 0 30px;
     text-align: center;
     outline: 0;
     display: inline-block;
@@ -564,6 +563,11 @@ input[type=submit] {
 }
 .cattitle span {
     font-size: 15px
+}
+.foot_subleft{
+   -ms-flex: 0 0 0;
+  flex: 0 0 0;
+  padding-right: 0;
 }
 }
 

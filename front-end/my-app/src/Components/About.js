@@ -26,28 +26,28 @@ export const About = () => {
       }, []);
   return (
     <>
-    <section className="about vh-100 w-100 d-flex flex-column text-align-center align-items-center">
-	<div className="container">
+    <section className="about w-100 d-flex flex-column text-align-center align-items-center">
+	<div className="container p-md-5 py-5">
 		<div className="story row position-relative">
 			<div className="col-md-5">
 				<span className="text-muted">Our Story</span>
 				<h2 className="display-5 fw-bold">About Us</h2>
 			</div>
-			<div className="col-md-6 offset-md-1">
+			<div className="col-md-6 offset-md-1 mb-md-0 mb-3">
 				<p className="lead">Since its inception in 2008, our shop has been dedicated to fulfilling every customer's need with unwavering commitment. Over the years, we have strived to provide exemplary service, ensuring satisfaction and trust in every interaction.</p>
 				<p className="lead">With over 15 years of experience, our journey has been marked by continuous growth and adaptation to evolving market demands. Looking ahead, we are committed to leveraging our expertise to innovate, ensuring unparalleled service and satisfaction for years to come.</p>
 			</div>
 		</div>
         <div className='row position-relative top-50'>
-            <div className='counter col-md-4 d-flex flex-column text-align-center align-items-center'>
+            <div className='counter col-md-4 d-flex flex-column text-md-center text-start align-item-center'>
                 <span><span className='fw-bold fs-1'>1</span>Lakh+</span>
                 <span className='lead'>No. Of Products</span>
             </div>
-            <div className='counter col-md-4 d-flex flex-column text-align-center align-items-center'>
+            <div className='counter col-md-4 d-flex flex-column text-center align-item-center'>
                 <span><span className='fw-bold fs-1'>15</span>+</span>
                 <span className='lead'>Years Of Experience</span>
             </div>
-            <div className='counter col-md-4 d-flex flex-column text-align-center align-items-center'>
+            <div className='counter col-md-4 d-flex flex-column text-md-center text-end align-item-center'>
                 <span><span className='count fw-bold fs-1' data-target='10000'>1</span>+</span>
                 <span className='lead'>Happy Clients</span>
             </div>

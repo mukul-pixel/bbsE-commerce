@@ -94,16 +94,16 @@ export const Navbars = () => {
               Contact
             </NavLink>
           </Nav>
-          <form className="d-flex ms-auto me-3">
+          <form className="d-flex mx-auto me-md-3 my-md-0 my-2">
             <input
-              className="form-control mr-sm-2 my-2 my-sm-0 me-2"
+              className="form-control w-md-auto w-50 my-md-2 my-0 me-md-3 mx-1"
               type="search"
               placeholder="Search"
               aria-label="Search"
               style={{fontSize:"small"}}
             />
             <button
-              className="btn my-2 my-sm-0 me-3"
+              className="btn my-md-2 my-0 me-md-3 me-1"
               type="submit"
               style={{fontSize:"small"}}
             >
@@ -111,10 +111,20 @@ export const Navbars = () => {
             </button>
             {isLogin ? (
   <>
-    <button onClick={handleLogout} style={{fontSize:"small"}} className="btn theme-btn my-2 my-sm-0 me-3">
+    <button onClick={handleLogout} style={{fontSize:"small"}} className="btn theme-btn my-md-2 my-0 me-md-3 ">
       Logout
     </button>
-    <NavLink
+  </>
+) : (
+  <>
+    <button onClick={handleLogout} style={{fontSize:"small"}} className="btn theme-btn my-md-2 my-0 me-md-3">
+      Login
+    </button>
+  </>
+)}
+          </form>
+          <div className='my-md-1 my-3'>
+            <NavLink
       to="/profile"
       title="Profile"
       className="px-3 py-1 mt-2 text-black"
@@ -124,22 +134,14 @@ export const Navbars = () => {
     <NavLink to="/cart" title="Cart" className="px-3 py-1 mt-2 text-black">
       <FontAwesomeIcon style={{ height: "22" }} icon={faShoppingCart} />
     </NavLink>
-  </>
-) : (
-  <>
-    <button onClick={handleLogout} style={{fontSize:"small"}} className="btn theme-btn my-2 my-sm-0 me-3">
-      Login
-    </button>
-  </>
-)}
-            <a
+    <a
               title="Find Us At"
               className="px-3 py-1 mt-2 text-black"
               href="https://www.google.co.in/maps/place/Barmer+Button+Store/@25.7423954,71.3851502,17z/data=!3m1!4b1!4m6!3m5!1s0x39443b0014e6c903:0xd772092598a6a576!8m2!3d25.7423954!4d71.3877251!16s%2Fg%2F11y30dsw09?entry=ttu"
             >
               <FontAwesomeIcon style={{ height: "22" }} icon={faLocationDot} />
             </a>
-          </form>
+            </div>
         </Navbar.Collapse>
       </Navbar>
     </>

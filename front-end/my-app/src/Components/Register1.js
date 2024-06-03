@@ -155,7 +155,7 @@ export const Register = () => {
     <>
     <ToastContainer />
     <section className="h-100 bg-black">
-    <div className="row d-flex justify-content-center align-items-center p-5 h-100">
+    <div className="row d-flex justify-content-center align-items-center p-md-5 p-3 h-100">
       <div className="col p-md-5">
         <div className="card h-auto w-auto card-registration p-md-5">
           <div className="row g-0" style={{height:"50%"}}>
@@ -164,7 +164,7 @@ export const Register = () => {
                 alt="Sample" className="img-fluid"
                 style={{borderTopLeftRadius: ".25rem", borderBottomLeftRadius: ".25rem", height:"100%" }}/>
             </div>
-            <form className="col-xl-6 py-3 px-5 border" onSubmit={handleSubmit}>
+            <form className="col-xl-6 py-3 px-md-5 border" onSubmit={handleSubmit}>
               <div className="card-body p-md-5 text-black">
                 <h3 className="mb-5 text-uppercase">Sign Up</h3>
 
@@ -201,8 +201,9 @@ export const Register = () => {
                 <div className="d-flex justify-content-center pt-3">
                   <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-dark btn-lg fs-6">Register</button>
                 </div>
-                <div className='d-flex justify-content-center'>
-                <Link to='/login' className='text-center p-3'>Already have an account ?</Link>
+                <div className='d-flex justify-content-center p-3'>
+                Already have an account ?
+                <Link to='/login'>Click here!</Link>
                 </div>
               </div>
             </form>

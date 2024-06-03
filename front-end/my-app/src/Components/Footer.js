@@ -12,7 +12,7 @@ export const Footer = () => {
     const email = "viivveek4@gmail.com";
   return (
     <>
-      <div className="py-5 my-5">
+      <div className="my-5">
         <div className='h-50'>.</div>
       </div>
       <footer className="footer bg-black text-light py-5">

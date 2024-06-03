@@ -9,7 +9,7 @@ export const UserHome = () => {
     <Userlayout>
         <Mycarousel/>
         <Categories/>
-        <div className="subscibe_section  wow fadeInUp">
+        <div className="subscibe_section wow fadeInUp">
         <div className="container">
             <div className="fsubouter">
                 <div className="foot_subscribe clearfix">
