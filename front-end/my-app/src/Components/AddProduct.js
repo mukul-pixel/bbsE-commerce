@@ -78,7 +78,7 @@ export const AddProduct = () => {
     <>
       <div className='bg-black p-3 text-center text-white fs-3'>ADD A PRODUCT</div>
       <form onSubmit={handleSubmit} className="row">
-        <div className="col-md-4 col-12">
+        <div className="col-md-4 col-12 probox">
         {selectedImages.map((image, index) => (
           // <span className="d-flex flex-column justify-content-center">
           <label key={index} htmlFor={`imageInput${index + 1}`} className="select-image-box m-2 col-md-5 col-5 border">
