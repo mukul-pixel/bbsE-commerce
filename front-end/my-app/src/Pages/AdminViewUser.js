@@ -1,5 +1,5 @@
 import React from 'react'
-import { ViewUser } from '../AdminComponents/ViewUser'
+import { ViewUser } from '../Components/ViewUser'
 import { Adminlayout } from '../Layout/Adminlayout'
 
 export const AdminViewUser = () => {

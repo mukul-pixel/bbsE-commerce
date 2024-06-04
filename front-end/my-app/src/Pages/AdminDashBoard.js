@@ -1,6 +1,6 @@
 import React from 'react'
 import { Adminlayout } from '../Layout/Adminlayout'
-import { AdminHome } from '../AdminComponents/AdminHome'
+import { AdminHome } from '../Components/AdminHome'
 
 export const AdminDashBoard = () => {
   return (

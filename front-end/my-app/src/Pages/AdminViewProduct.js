@@ -1,6 +1,6 @@
 import React from 'react'
 import { Adminlayout } from '../Layout/Adminlayout'
-import { ViewProduct } from '../AdminComponents/ViewProduct'
+import { ViewProduct } from '../Components/ViewProduct'
 
 export const AdminViewProduct = () => {
   return (
