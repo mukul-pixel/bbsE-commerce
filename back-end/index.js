@@ -128,54 +128,61 @@ app.get("/profile", async (req, res) => {
 
     //multer middleware
     const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'Images'); // Specify the destination folder for storing uploaded images
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + '-' + file.originalname); // Generate unique filename for each uploaded image
-        }
+      destination: function (req, file, cb) {
+        cb(null, 'Images'); // Specify the destination folder for storing uploaded images
+      },
+      filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Generate unique filename for each uploaded image
+      }
     });
     
     const upload = multer({ storage: storage });
-    let multipleUpload = upload.fields([{ name : "images" , maxCount : 4 }]);
+    let multipleUpload = upload.fields([{ name: 'images', maxCount: 4 }]);
+    
     app.use('/Images', express.static(path.join(__dirname, 'Images')));
-
-    //API for add product 
-    app.post("/addProduct", multipleUpload, async (req, res) => {
-        try {
-            // Extract product details from the request body
-            const productName = req.body.productName;
-            const productPrice = req.body.productPrice;
-            const productDescription = req.body.productDescription;
-            const productCategory = req.body.productCategory;
-            const productQuantity = req.body.productQuantity;
-            const productMaterial = req.body.productMaterial;
     
-            // Extract filenames of the uploaded images from req.files object
-            const imageFiles = req.files['images'];
-    
-            // Store the filenames of the uploaded images in an array
-            const imageFilenames = imageFiles.map(file => file.filename);
-            // Create a new product instance
-            const newProduct = await Product.create({
-                productName,
-                productPrice,
-                productDescription,
-                productCategory,
-                productQuantity,
-                productMaterial,
-                images: imageFilenames // Save the filenames of the uploaded images in the 'images' field
-            });
-            // Save the new product to the database
-            await newProduct.save();
-    
-            res.status(201).json({ data:newProduct , message: 'Product added' });
-        } catch (error) {
-            console.error('Error:', error);
-            res.status(500).json({ message: 'Internal server error' });
+    app.post('/addProduct', multipleUpload, async (req, res) => {
+      try {
+        // Check if files are uploaded
+        if (!req.files || !req.files['images']) {
+          return res.status(400).json({ message: 'No images uploaded' });
         }
+    
+        // Extract product details from the request body
+        const { productName, productPrice, productDescription, productCategory, productQuantity, productMaterial } = req.body;
+    
+        // Check if required fields are present
+        if (!productName || !productPrice || !productDescription || !productCategory || !productQuantity || !productMaterial) {
+          return res.status(400).json({ message: 'Missing required fields' });
+        }
+    
+        // Extract filenames of the uploaded images from req.files object
+        const imageFiles = req.files['images'];
+    
+        // Store the filenames of the uploaded images in an array
+        const imageFilenames = imageFiles.map(file => file.filename);
+    
+        // Create a new product instance
+        const newProduct = await Product.create({
+          productName,
+          productPrice,
+          productDescription,
+          productCategory,
+          productQuantity,
+          productMaterial,
+          images: imageFilenames // Save the filenames of the uploaded images in the 'images' field
+        });
+    
+        // Save the new product to the database
+        await newProduct.save();
+    
+        res.status(201).json({ data: newProduct, message: 'Product added' });
+      } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
     });
-
+    
     //api for product component to get products
     app.get("/getProduct", async (req,res)=>{
         try {

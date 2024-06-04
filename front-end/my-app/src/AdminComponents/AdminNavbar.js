@@ -19,7 +19,7 @@ export const AdminNavbar = ({ children }) => {
   // };
   return (
     <>
-      <div className="row p-0 vh-100">
+      <div className="row p-0">
         <span
           id="bdSidebar"
           className={`col-md-3 col-sm-6  d-flex flex-column flex-shrink-0 p-3 ${
