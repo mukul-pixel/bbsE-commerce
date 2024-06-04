@@ -19,12 +19,12 @@ import { Products } from "./Components/Products";
 
 
 function App() {
-  const role = localStorage.getItem("role");
+  // const role = localStorage.getItem("role");
   return (
     <Router>
       <Routes>
-        {role === 'admin'?
-        <>
+        {/* {role === 'admin'?
+        <> */}
         <Route path="admin" element={<AdminDashBoard />}></Route>
         <Route path="addProduct" element={<AdminAddProduct />}></Route>
         <Route path="/" element={<UserHome />}></Route>
@@ -42,7 +42,7 @@ function App() {
         <Route path="checkout" element={<Checkout/>}></Route>
         <Route path="products" element={<Products/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
-        </>:
+        {/* </>:
         <>
         <Route path="/" element={<UserHome />}></Route>
         <Route path="about" element={<UserAbout />}></Route>
@@ -57,7 +57,7 @@ function App() {
         <Route path="checkout" element={<Checkout/>}></Route>
         <Route path="products" element={<Products/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
-        </>}
+        </>} */}
       </Routes>
     </Router>
   );

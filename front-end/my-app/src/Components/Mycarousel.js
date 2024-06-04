@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
-// import logoImage from '../../src/images/image2.jpeg';
+import logoImage from '../../src/images/carouselImg1.avif';
 import myVideo from '../../src/images/Black White Minimalist Logo.mp4';
 import logoImage1 from '../../src/images/R.jpeg';
 
@@ -32,7 +32,7 @@ export const Mycarousel = () => {
       <div id='carousel' style={{ maxHeight: '75vh' }}>
         <img
           className="w-100"
-          src="https://plus.unsplash.com/premium_photo-1676586310000-7853f88a29cd?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={logoImage}
           alt="First slide"
           style={{maxHeight: '75vh' }}
         />

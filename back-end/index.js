@@ -45,7 +45,7 @@ app.post("/login",async (req,res)=>{
         if (!userExist) {
             res.json("User not found");   
         } else {
-            const match = await bcrypt.compare(password, userExist.password);
+            const match = bcrypt.compare(password, userExist.password);
             if (match) {
                 const token = await userExist.generateToken();
                 res.status(200).json({
