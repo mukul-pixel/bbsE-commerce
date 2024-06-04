@@ -10,6 +10,7 @@ const Product = require("./models/productModel");
 const Review = require('./models/reviewModel');
 const Cart = require("./models/cartModel");
 const { MongoClient } = require('mongodb');
+const { uploadOnCloudinary } = require('./cloudinary');
 require("dotenv").config();
 const PORT = 5000;
 const MONGO_URI =process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bbs";
@@ -127,54 +128,79 @@ app.get("/profile", async (req, res) => {
     //Add Product 
 
     //multer middleware
-    const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'Images'); // Specify the destination folder for storing uploaded images
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + '-' + file.originalname); // Generate unique filename for each uploaded image
-        }
-    });
+    // const storage = multer.diskStorage({
+    //     destination: function (req, file, cb) {
+    //         cb(null, 'Images'); // Specify the destination folder for storing uploaded images
+    //     },
+    //     filename: function (req, file, cb) {
+    //         cb(null, Date.now() + '-' + file.originalname); // Generate unique filename for each uploaded image
+    //     }
+    // });
     
-    const upload = multer({ storage: storage });
-    let multipleUpload = upload.fields([{ name : "images" , maxCount : 4 }]);
-    app.use('/Images', express.static(path.join(__dirname, 'Images')));
+    // const upload = multer({ storage: storage });
+    // let multipleUpload = upload.fields([{ name : "images" , maxCount : 4 }]);
+    // app.use('/Images', express.static(path.join(__dirname, 'Images')));
 
     //API for add product 
-    app.post("/addProduct", multipleUpload, async (req, res) => {
+    // Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'Images'); // Temporary storage folder
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname); // Generate unique filename
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Serve static files from the 'Images' folder
+app.use('/Images', express.static(path.join(__dirname, 'Images')));
+
+// API endpoint to add a product
+app.post("/addProduct", upload.array('images', 4), async (req, res) => {
+  try {
+      // Extract product details from the request body
+      const { productName, productPrice, productDescription, productCategory, productQuantity, productMaterial } = req.body;
+
+      // Extract filenames of the uploaded images from req.files object
+      const imageFiles = req.files;
+
+      // Upload images to Cloudinary and retrieve their public URLs
+      const imageUrls = [];
+      for (const file of imageFiles) {
         try {
-            // Extract product details from the request body
-            const productName = req.body.productName;
-            const productPrice = req.body.productPrice;
-            const productDescription = req.body.productDescription;
-            const productCategory = req.body.productCategory;
-            const productQuantity = req.body.productQuantity;
-            const productMaterial = req.body.productMaterial;
-    
-            // Extract filenames of the uploaded images from req.files object
-            const imageFiles = req.files['images'];
-    
-            // Store the filenames of the uploaded images in an array
-            const imageFilenames = imageFiles.map(file => file.filename);
-            // Create a new product instance
-            const newProduct = await Product.create({
-                productName,
-                productPrice,
-                productDescription,
-                productCategory,
-                productQuantity,
-                productMaterial,
-                images: imageFilenames // Save the filenames of the uploaded images in the 'images' field
-            });
-            // Save the new product to the database
-            await newProduct.save();
-    
-            res.status(201).json({ data:newProduct , message: 'Product added' });
+            const response = await uploadOnCloudinary(file.path);
+            if (response && response.url) {
+                imageUrls.push(response.url); // Add Cloudinary URL to the array
+            } else {
+                console.error("No URL returned from Cloudinary for file:", file.filename);
+            }
         } catch (error) {
-            console.error('Error:', error);
-            res.status(500).json({ message: 'Internal server error' });
+            console.error("Error uploading file to Cloudinary:", file.filename, error);
         }
-    });
+    }
+
+      // Create a new product instance
+      const newProduct = await Product.create({
+          productName,
+          productPrice,
+          productDescription,
+          productCategory,
+          productQuantity,
+          productMaterial,
+          images: imageUrls // Save the Cloudinary URLs in the 'images' field
+      });
+
+      // Save the new product to the database
+      await newProduct.save();
+
+      res.status(201).json({ data: newProduct, message: 'Product added' });
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
     //api for product component to get products
     app.get("/getProduct", async (req,res)=>{

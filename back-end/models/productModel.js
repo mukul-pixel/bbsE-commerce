@@ -16,10 +16,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    productSubCategory: {
-        type:String,
-        required: true
-    },
+    // productSubCategory: {
+    //     type:String,
+    //     required: true
+    // },
     productQuantity: {
         type: Number,
     },
