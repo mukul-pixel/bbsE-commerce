@@ -16,8 +16,6 @@ import { AdminViewProduct } from "./Pages/AdminViewProduct";
 import { AdminViewUser } from "./Pages/AdminViewUser";
 import { Checkout } from "./Components/Checkout";
 import { Products } from "./Components/Products";
-import { AdminHome } from "./Components/AdminHome";
-import { AddProduct } from "./Components/AddProduct";
 
 
 function App() {
@@ -27,8 +25,8 @@ function App() {
       <Routes>
         {/* {role === 'admin'?
         <> */}
-        <><Route path="admin" element={<AdminHome />}></Route>
-        <Route path="addProduct" element={<AddProduct />}></Route>
+        <><Route path="admin" element={<AdminDashBoard />}></Route>
+        <Route path="addProduct" element={<AdminAddProduct />}></Route>
         <Route path="/" element={<UserHome />}></Route>
         <Route path="about" element={<UserAbout />}></Route>
         <Route path="contact" element={<UserContact />}></Route>
