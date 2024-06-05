@@ -10,7 +10,7 @@ export const ViewProduct = () => {
   useEffect(()=>{
     const getProducts = async ()=>{
       try{
-      const response = await axios.get("http://localhost:5000/getProduct");
+      const response = await axios.get("https://bbse-commerce.onrender.com/getProduct");
       if (response.data.status === "ok") {
         // Extract product data from the response
         const products = response.data.data;

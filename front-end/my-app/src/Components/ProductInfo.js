@@ -38,7 +38,7 @@ export const ProductInfo = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/productinfo/${productId}`);
+        const response = await axios.get(`https://bbse-commerce.onrender.com/productinfo/${productId}`);
         if (response.data.status === "ok") {
           setProduct(response.data.data);
         } else {
