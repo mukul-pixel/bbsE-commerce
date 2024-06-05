@@ -1,6 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 export const Products = () => {
     const [products,setProducts] = useState(null);
@@ -140,20 +145,51 @@ export const Products = () => {
     </div>
     <hr className='my-3'/>
   </div>
-  <div>
-    <div className='row p-md-4 p-0'>
+  <div className='p-0'>
+    <div className='row p-md-4 mx-1 ms-1 p-0'>
     {sortedProducts.length === 0 ? (
         <div>Nothing to show</div>
       ) : (
         sortedProducts.map((data, index) => (
           <div key={index+1} className="card col-md-2 col-6 px-0 mx-md-4 my-md-2 my-3" style={{aspectRatio:"1/1"}}>
-            {data.images.length > 0 && (
+           <div className='productTop'>
+           <div className='productProfile'>
+           {data.images.length > 0 && (
               <img src={`${data.images[0]}`} className="card-img-top" style={{aspectRatio:"1/1"}} alt="Product" />
             )}
+           </div>
+           <div className='profileCarousel'>
+      {data.images.length > 0 && (
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 1000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Autoplay, Pagination]}
+          className="mySwiper"
+        >
+          {data.images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img 
+                src={image} 
+                className="card-img-top" 
+                style={{ aspectRatio: "1/1" }} 
+                alt={`Product ${index + 1}`} 
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </div>
+           </div>
             <div className="card-body">
               <span>{data.productPrice}</span>
               <h5 className="card-title">{data.productName}</h5>
-              <p className="card-text">{data.productDescription}</p>
               <Link to={`/productinfo/${data._id}`} className="btn btn-primary">View Product Info</Link>
             </div>
           </div>

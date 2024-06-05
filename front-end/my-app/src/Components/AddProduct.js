@@ -41,8 +41,8 @@ export const AddProduct = () => {
     }
   };
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(productName,productPrice,productQuantity,productDescription,productCategory,selectedImages);
+    // e.preventDefault();
+    // console.log(productName,productPrice,productQuantity,productDescription,productCategory,selectedImages);
     const formData = new FormData();
     const fileInputs = e.target.querySelectorAll('input[type="file"]');
 
