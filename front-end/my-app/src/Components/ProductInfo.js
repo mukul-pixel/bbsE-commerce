@@ -189,7 +189,7 @@ export const ProductInfo = () => {
                 {product.images.map((image, index) => (
                   <img
                     key={index}
-                    src={`https://bbse-commerce.onrender.com/Images/${image}`}
+                    src={`${image}`}
                     alt={`Product pic ${index + 1}`}
                     className="img-fluid py-2"
                     onClick={() => handleImageChange(image)}
@@ -204,7 +204,7 @@ export const ProductInfo = () => {
               >
                 <img
                     id='productImg'
-                    src={imageUrl?`https://bbse-commerce.onrender.com/Images/${imageUrl}`:`https://bbse-commerce.onrender.com/Images/${product.images[0]}`}
+                    src={imageUrl?`${imageUrl}`:`${product.images[0]}`}
                     alt="Zoomable pic"
                     className={isHovered ? 'zoomed' : ''}
                     onMouseEnter={() => setIsHovered(true)}

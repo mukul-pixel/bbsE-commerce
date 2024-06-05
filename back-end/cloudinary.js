@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 
@@ -10,24 +11,12 @@ cloudinary.config({
 
 const uploadOnCloudinary = async (localFilePath) => {
     try {
-        if (!localFilePath) {
-            console.log("File path not available");
-            return null;
-        }
-
+        if (!localFilePath) return console.log("File path not available");
         const response = await cloudinary.uploader.upload(localFilePath, { resource_type: "auto" });
-
-        if (response && response.url) {
-            console.log("File is uploaded on Cloudinary", response.url);
-            fs.unlinkSync(localFilePath); // Delete the local file after upload
-            return response;
-        } else {
-            console.log("No URL returned from Cloudinary", response);
-            fs.unlinkSync(localFilePath); // Delete the local file in case of error
-            return null;
-        }
+        console.log("File is uploaded on Cloudinary", response.url);
+        fs.unlinkSync(localFilePath); // Delete the local file after upload
+        return response;
     } catch (error) {
-        console.error("Cloudinary upload error:", error);
         fs.unlinkSync(localFilePath); // Delete the local file in case of error
         throw error;
     }
