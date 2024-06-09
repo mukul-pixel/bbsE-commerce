@@ -54,7 +54,7 @@ export const Edit = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({name,mail,contact,location,imageSrc,userId});
+        // console.log({name,mail,contact,location,imageSrc,userId});
         try{
             const response = await axios.put("https://bbse-commerce.onrender.com/edit", {
             name,

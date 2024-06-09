@@ -99,7 +99,7 @@ export const Cart = () => {
 
   return (
     <>
-    <div className="d-none">{initialQuantities}</div>
+    <div className="d-none">{JSON.stringify(initialQuantities)}</div>
     <div className="text-center border-top border-bottom fs-2 p-1 fw-bold ">
           Cart
         </div>
@@ -107,17 +107,21 @@ export const Cart = () => {
     <div className="col-md-9">
       <div className="card border-0">
         <div className="card-body">
-          <div className="row cart-items">
-          {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-          {cart.map((item) => (
-            <CartItem key={item._id} item={item} onPriceUpdate={handlePriceUpdate} onRemove={handleRemoveItem} onUpdateQuantity={handleUpdateQuantity} />
-          ))}
-        </div>
-      )}
-          </div>
+        <div className="row cart-items">
+                {cart.length === 0 ? (
+                  <p>Your cart is empty.</p>
+                ) : (
+                  cart.map((item) => (
+                    <CartItem
+                      key={item._id}
+                      item={item}
+                      onPriceUpdate={handlePriceUpdate}
+                      onRemove={handleRemoveItem}
+                      onUpdateQuantity={handleUpdateQuantity}
+                    />
+                  ))
+                )}
+              </div>
         </div>
       </div>
     </div>
@@ -140,19 +144,19 @@ export const Cart = () => {
         </div>
         <div className="col-6 text-end">
         <ul className='list-unstyled'>
-  {cart.map((item, index) => {
-    const productDetail = productDetails.find(product => product._id === item.productId);
-    if (productDetail) {
-      return (
-        <li key={index}>
-          {productDetail.productPrice} x {item.quantity} = {productDetail.productPrice * item.quantity}
-        </li>
-      );
-    } else {
-      return null; // Or render a placeholder if product details are not available
-    }
-  })}
-</ul>
+                        {cart.map((item) => {
+                          const productDetail = productDetails.find(product => product._id === item.productId);
+                          if (productDetail) {
+                            return (
+                              <li key={item.productId}>
+                                {productDetail.productPrice} x {item.quantity} = {productDetail.productPrice * item.quantity}
+                              </li>
+                            );
+                          } else {
+                            return null; // Or render a placeholder if product details are not available
+                          }
+                        })}
+                      </ul>
           <hr className='p-0 m-0'/>
           <p>{totalPrice}</p>
         </div>

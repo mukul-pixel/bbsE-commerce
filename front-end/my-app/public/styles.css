@@ -271,9 +271,9 @@ body{
     height: 240px;
     width: 250px;
   }   
-  #productImgs{
+  /* #productImgs{
     margin-left: 10%;
-  }
+  } */
 }
 @media (max-width: 400px){
   #carousel{

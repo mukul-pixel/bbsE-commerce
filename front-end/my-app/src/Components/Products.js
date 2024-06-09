@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination } from 'swiper/modules';
 
 export const Products = () => {
+    const location = useLocation();
     const [products,setProducts] = useState(null);
     const [filters, setFilters] = useState([]);
     const [sortOrder, setSortOrder] = useState(null);
@@ -56,15 +57,23 @@ export const Products = () => {
     });
       };
     
-      const getFilteredProducts = () => {
-        if (!products) return [];
+      useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const category = queryParams.get('category');
+        if (category) {
+          setFilters([category]);
+        } else {
+          setFilters([]);
+        }
+      }, [location.search]);
     
-        return products.filter((product) => {
-          if (filters.length === 0) {
-            return true; // No filters applied, show all products
-          }
-          return filters.includes(product.productCategory); // Assuming each product has a 'category' field
-        });
+      const getFilteredProducts = () => {
+        if (!products || !Array.isArray(products)) return []; // Ensure products is an array
+    
+        if (filters.length === 0) {
+          return products; // No filters applied, show all products
+        }
+        return products.filter((product) => filters.includes(product.productCategory));
       };
     
       const getSortedProducts = (filteredProducts) => {

@@ -184,7 +184,7 @@ export const ProductInfo = () => {
       {product ? (
         <div className="row">
           <div className="col-md-6">
-          <div id='productImgs' className="row">
+          <div id='productImgs' className="row ms-md-0 ms-lg-1 ms-3">
               <div className="col-md-2 col-2 me-md-0 me-2">
                 {product.images.map((image, index) => (
                   <img
