@@ -104,7 +104,7 @@ export const Cart = () => {
           Cart
         </div>
   <div className="row">
-    <div className="col-md-9">
+    <div className="col-lg-9 col-md-8">
       <div className="card border-0">
         <div className="card-body">
         <div className="row cart-items">
@@ -125,30 +125,34 @@ export const Cart = () => {
         </div>
       </div>
     </div>
-    <div className="col-md-3 my-4">
+    <div className="col-lg-3 col-md-4 my-4">
         <div className="card">
           <div className="card-header">
             Order Summary
           </div>
           <div className="card-body">
             <div className="row">
-              <div className="col-12">
-                <p>Subtotal: <FontAwesomeIcon className='fs-6 px-2' icon={faIndianRupee} />{totalPrice.toFixed(2)}</p>
-                <div className="row mb-2 ms-4 border p-2 rounded-3">
-        <div className="col-6">
-          <ol>
-            {productDetails.map((product, index) => (
-              <li key={index}>{product.productName}</li>
-            ))}
-          </ol>
-        </div>
-        <div className="col-6 text-end">
-        <ul className='list-unstyled'>
+            <div className="col-12">
+                  <p>
+                    Subtotal: 
+                    <FontAwesomeIcon className='fs-6 px-2' icon={faIndianRupee} />{totalPrice.toFixed(2)}
+                    <span className='subtotalDetails bg-black text-white px-1 mx-2' style={{ borderRadius: "50%", fontSize: "smaller" }}>?</span>
+                  <div className="ms-lg-4 ms-0 border p-2 rounded-3 subTotalShow">
+                    <div className='row'>                   
+                    <div className="col-6 d-flex">
+                      <ol>
+                        {productDetails.map((product, index) => (
+                          <li key={index}>{product.productName}</li>
+                        ))}
+                      </ol>
+                    </div>
+                    <div className="col-6 text-end">
+                      <ul className='list-unstyled'>
                         {cart.map((item) => {
                           const productDetail = productDetails.find(product => product._id === item.productId);
                           if (productDetail) {
                             return (
-                              <li key={item.productId}>
+                              <li key={item.productId} className='d-flex'>
                                 {productDetail.productPrice} x {item.quantity} = {productDetail.productPrice * item.quantity}
                               </li>
                             );
@@ -157,11 +161,13 @@ export const Cart = () => {
                           }
                         })}
                       </ul>
-          <hr className='p-0 m-0'/>
-          <p>{totalPrice}</p>
-        </div>
-      </div>
-              </div>
+                      <hr className='p-0 m-0' />
+                      <p>{totalPrice}</p>
+                    </div>
+                    </div>
+                  </div>
+                  </p>
+                </div>
               <div className="col-12">
                 <p>Discount: <FontAwesomeIcon className='fs-6 px-2' icon={faIndianRupee} />0.00</p>
               </div>

@@ -54,9 +54,9 @@ export const CartItem = ({item, onPriceUpdate, onRemove, onUpdateQuantity}) => {
     }
     return (
       <>
-      <div className={`row border my-2 mx-2 p-2 ${isHidden ? 'hidden' : ''}`}>
-        <div className='col-md-4 col-4 my-auto'><img src={`https://bbse-commerce.onrender.com/Images/${cartProduct.images[0]}`} className="p-2 h-75 w-50" alt={cartProduct.productName} /></div>
-        <div className="col-md-5 col-5">
+      <div className={`row border my-2 mx-2 p-md-2 p-0 ${isHidden ? 'hidden' : ''}`}>
+        <div className='col-md-3 col-3'><img src={`${cartProduct.images[0]}`} className="p-md-2 p-0 h-75 my-md-0 my-2  w-100" alt={cartProduct.productName} /></div>
+        <div className="col-md-6 col-6 p-1 px-md-3">
           <h5 className="fw-bold">{cartProduct.productName}</h5>
           <p className='p-0 m-0'>{cartProduct.productDescription}</p>
           <p className='p-0 m-0' style={{fontSize:"smaller"}}><strong className='me-2'>Category:</strong>{cartProduct.productCategory}</p>
@@ -66,7 +66,7 @@ export const CartItem = ({item, onPriceUpdate, onRemove, onUpdateQuantity}) => {
             ))}
           </select></p>
         </div>
-        <div className='col-md-3 col-3'>
+        <div className='col-md-3 col-3 px-md-3'>
         <p className=""><FontAwesomeIcon className='fs-6 px-2' icon={faIndianRupee} /> {cartProduct.productPrice}</p>
         <button 
           className="btn btn-sm d-flex fw-bold my-5" 

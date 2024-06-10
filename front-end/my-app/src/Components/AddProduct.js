@@ -6,6 +6,7 @@ export const AddProduct = () => {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productCategory, setProductCategory] = useState("");
+  const [productSubCategory, setProductSubCategory] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [productMaterial, setProductMaterial] = useState("");
 
@@ -34,6 +35,8 @@ export const AddProduct = () => {
       setProductPrice(value);
     } else if (name === "product-category") {
       setProductCategory(value);
+    }else if (name === "product-subcategory") {
+      setProductSubCategory(value);
     } else if (name === "product-quantity") {
       setProductQuantity(value);
     } else if(name === "product-material") {
@@ -41,8 +44,6 @@ export const AddProduct = () => {
     }
   };
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // console.log(productName,productPrice,productQuantity,productDescription,productCategory,selectedImages);
     const formData = new FormData();
     const fileInputs = e.target.querySelectorAll('input[type="file"]');
 
@@ -58,6 +59,7 @@ export const AddProduct = () => {
     formData.append('productName', productName);
     formData.append('productDescription', productDescription);
     formData.append('productPrice', productPrice);
+    formData.append('productSubCategory',productSubCategory)
     formData.append('productCategory',productCategory);
     formData.append('productQuantity',productQuantity);
     formData.append('productMaterial',productMaterial);
@@ -137,12 +139,28 @@ export const AddProduct = () => {
           </div>
           <div className="p-3">
             <label htmlFor="product-category">Product Category</label>
+            <select
+        id="product-category"
+        name="product-category"
+        className="ms-5"
+        aria-placeholder={productCategory}
+        onChange={handleInputChange}
+      >
+        <option value="">Select a category</option>
+        <option value="threads">Thread</option>
+        <option value="embellishments">Embellishment</option>
+        <option value="tools&accessories">Tools & Accessories</option>
+        <option value="buttons">Button</option>
+      </select>
+          </div>
+          <div className="p-3">
+            <label htmlFor="product-subcategory">Product Category</label>
             <input
-              id="product-category"
-              name="product-category"
+              id="product-subcategory"
+              name="product-subcategory"
               className="form-control"
               type="text"
-              value={productCategory}
+              value={productSubCategory}
               onChange={handleInputChange}
             />
           </div>
