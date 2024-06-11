@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination } from 'swiper/modules';
+import Shimmer from './Shimmer';
 
 export const Products = () => {
     const location = useLocation();
@@ -169,7 +170,11 @@ export const Products = () => {
   </div>
   <div className='p-0'>
     <div className='row p-md-4 mx-1 ms-1 p-0'>
-    {sortedProducts.length === 0 ? (
+    {products === null ? (
+                            Array.from({ length: 4 }).map((_, index) => (
+                                <Shimmer key={index} />
+                            ))
+                        ) : sortedProducts.length === 0 ? (
         <div>Nothing to show</div>
       ) : (
         sortedProducts.map((data, index) => (

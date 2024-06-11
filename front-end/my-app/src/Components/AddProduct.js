@@ -143,7 +143,7 @@ export const AddProduct = () => {
         id="product-category"
         name="product-category"
         className="ms-5"
-        aria-placeholder={productCategory}
+        value={productCategory}
         onChange={handleInputChange}
       >
         <option value="">Select a category</option>

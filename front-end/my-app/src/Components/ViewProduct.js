@@ -41,6 +41,7 @@ export const ViewProduct = () => {
     const lowercasedTerm = searchTerm.toLowerCase();
     const filtered = products.filter(product =>
       (product.productName && product.productName.toLowerCase().includes(lowercasedTerm)) ||
+      (product.productSubCategory && product.productSubCategory.toLowerCase().includes(lowercasedTerm)) ||
       (product.productCategory && product.productCategory.toLowerCase().includes(lowercasedTerm)) ||
       (product.productQuantity && product.productQuantity.toString().includes(lowercasedTerm)) ||
       (product.productPrice && product.productPrice.toString().includes(lowercasedTerm)) ||
@@ -96,6 +97,7 @@ const handleSubmit = () => {
             <th>Price</th>
             <th>Description</th>
             <th>Category</th>
+            <th>Sub-Category</th>
             <th>Quantity</th>
             <th>Material</th>
           </tr>
@@ -110,6 +112,7 @@ const handleSubmit = () => {
                   <td>{product.productPrice}</td>
                   <td>{product.productDescription}</td>
                   <td>{product.productCategory}</td>
+                  <td>{product.productSubCategory}</td>
                   <td>{product.productQuantity}</td>
                   <td>{product.productMaterial}</td>
                 </tr>
@@ -154,6 +157,10 @@ const handleSubmit = () => {
                     <div>
                         <label>Product Category</label>
                         <input name="productCategory" type="text" value={selectedProduct.productCategory} className='form-control' onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label>Product Sub-Category</label>
+                        <input name="product-subCategory" type="text" value={selectedProduct.productSubCategory} className='form-control' onChange={handleChange} />
                     </div>
                     <div>
                         <label>Product Quantity</label>
