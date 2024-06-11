@@ -96,7 +96,7 @@ export const Products = () => {
       // console.log(products)
   return (
     <>
-    <div className='row border'>
+    <div className='row'>
   <div className='col-3d-block row my-3 mx-0'>
   <div className='filterBar col-6 text-start ps-4'>
   <button className="btn btn-primary w-auto h-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">Filter</button>

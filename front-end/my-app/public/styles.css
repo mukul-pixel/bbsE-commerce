@@ -663,6 +663,19 @@ input[type=submit] {
     transition: all .3s ease-in-out 0s
 }
 
+@media only screen and (min-width: 575.20px) and (max-width: 1200px) {
+  .cattitle span {
+    font-size: 10px;
+    padding: 7px 15px;
+  }
+}
+@media only screen and (max-width:575.19px) {
+  .cattitle span {
+    font-size: 15px
+}
+}
+
+
 @media only screen and (max-width:767px){
   .cathover {
     left: 5px;
@@ -674,13 +687,18 @@ input[type=submit] {
     font-size: 12px;
     margin-top: 10px
 }
-.cattitle span {
-    font-size: 15px
-}
 .foot_subleft{
    -ms-flex: 0 0 0;
   flex: 0 0 0;
   padding-right: 0;
 }
+}
+
+/* subscribeModel*/
+.modal-content{
+  background: url(https://images.unsplash.com/photo-1609457086224-4c458106a32d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
