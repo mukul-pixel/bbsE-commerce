@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Services } from './Services';
 
 export const Categories = () => {
     const [showModal, setShowModal] = useState(false);
@@ -50,7 +51,7 @@ export const Categories = () => {
                 </div>
                 <div className="col-sm-6">
                     <div className="catbox hovereffect">
-                        <NavLink to="/products?category=tools&accessories">
+                        <NavLink to="/products?category=toolsAndAccessories">
                             <figure><img className="lazy" src="https://images.unsplash.com/photo-1628565663674-de1c8161d72c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHRhaWxvciUyMGVtYmVsbGlzaG1lbnRzfGVufDB8fDB8fHww" alt="TOOLS &amp; ACCESSORIES"/></figure>
                             <div className="cathover">
                                 <div className="cathinner">
@@ -63,7 +64,8 @@ export const Categories = () => {
             </div>
         </div>
     </section>
-    <div className="subscibe_section wow fadeInUp">
+    <Services/>
+    <div className="subscibe_section pt-4 wow fadeInUp">
         <div className="container">
             <div className="fsubouter">
                 <div className="foot_subscribe clearfix">
@@ -82,7 +84,7 @@ export const Categories = () => {
       {showModal && (
         <div className="modal fade show" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
         <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div className="modal-content">
+          <div className="modal-content modalSubscribe">
           <div className='text-end'>
           <button type="button" className="btn-close bg-light m-2" onClick={toggleModal}></button>
           </div>

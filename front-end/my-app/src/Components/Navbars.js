@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import logoImage from '../../src/images/dcd1ad97-eb2e-4bdf-afb2-aa66482dd1d3.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+// import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { About } from './About';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -93,6 +93,12 @@ export const Navbars = () => {
             >
               Contact
             </NavLink>
+            <a
+              className="text-decoration-none text-black mt-2 mx-3"
+              href='#services'
+            >
+              Services
+            </a>
           </Nav>
           <form className="d-flex mx-auto me-md-3 my-md-0 my-2">
             <input
@@ -131,9 +137,9 @@ export const Navbars = () => {
     >
       <FontAwesomeIcon style={{ height: "22" }} icon={faUser} />
     </NavLink>
-    <NavLink to="/cart" title="Cart" className="px-3 py-1 mt-2 text-black">
+    {/* <NavLink to="/cart" title="Cart" className="px-3 py-1 mt-2 text-black">
       <FontAwesomeIcon style={{ height: "22" }} icon={faShoppingCart} />
-    </NavLink>
+    </NavLink> */}
     <a
               title="Find Us At"
               className="px-3 py-1 mt-2 text-black"

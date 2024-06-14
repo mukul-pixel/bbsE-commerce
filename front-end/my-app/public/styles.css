@@ -321,7 +321,7 @@ body{
   aspect-ratio: 1/1;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
-  animation: shimmer 3.5s infinite;
+  animation: shimmer 2.5s infinite;
 }
 
 .shimmer-product-profile {
@@ -341,7 +341,7 @@ body{
 .shimmer-button {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
-  animation: shimmer 3.5s infinite;
+  animation: shimmer 2.5s infinite;
   margin: 0.5rem 0;
   height: 1rem;
   border-radius: 4px;
@@ -695,7 +695,7 @@ input[type=submit] {
 }
 
 /* subscribeModel*/
-.modal-content{
+.modalSubscribe{
   background: url(https://images.unsplash.com/photo-1609457086224-4c458106a32d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
   background-repeat: no-repeat;
   background-position: center;

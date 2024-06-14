@@ -15,7 +15,7 @@ import { UserProductInfo } from "./Pages/UserProductInfo";
 import { AdminViewProduct } from "./Pages/AdminViewProduct";
 import { AdminViewUser } from "./Pages/AdminViewUser";
 import { Checkout } from "./Components/Checkout";
-import { Products } from "./Components/Products";
+import { UserProducts } from "./Pages/UserProducts";
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
         <Route path="viewproduct" element={<AdminViewProduct/>}></Route>
         <Route path="viewuser" element={<AdminViewUser/>}></Route>
         <Route path="checkout" element={<Checkout/>}></Route>
-        <Route path="products" element={<Products/>}></Route>
+        <Route path="products" element={<UserProducts/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
         </>
         {/* </>:

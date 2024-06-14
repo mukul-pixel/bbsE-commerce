@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faUser,
   faBagShopping,
-  faTruckFast,
-  faWallet,
+  // faTruckFast,
+  // faWallet,
   faLandmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router-dom";
 import logoImage from "../../src/images/dcd1ad97-eb2e-4bdf-afb2-aa66482dd1d3.svg";
+import axios from "axios";
 
 export const AdminNavbar = ({ children }) => {
   let sidebarOpen = true;
+  const [formData,setFormData] = useState({});
+  
+  useEffect(() => {
+    let userId = localStorage.getItem('userId');
+    const fetchUserData = async (userId) => {
+      try {
+        const response = await axios.get(`https://bbse-commerce.onrender.com/profile?userId=${userId}`);
+        const userData = response.data;
+        if(!userData.error){
+          setFormData(userData);
+        }
+  
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+      }
+    };
 
+    fetchUserData(userId);
+  }, []);
   // const toggleSidebar = () => {
   //   setSidebarOpen(!sidebarOpen);
   // };
@@ -72,7 +91,7 @@ export const AdminNavbar = ({ children }) => {
                 </ul>
               </details>
             </li>
-            <li className="nav-item mb-2 px-2">
+            {/* <li className="nav-item mb-2 px-2">
               <details>
                 <summary className="mb-1">
                   <FontAwesomeIcon className="px-2" icon={faTruckFast} />
@@ -122,7 +141,6 @@ export const AdminNavbar = ({ children }) => {
                   Transaction
                 </summary>
                 <ul className="mb-2">
-                  {/* Dropdown menu items */}
                   <li>
                     <Link href="#" className="text-light text-decoration-none">
                       View Transaction
@@ -135,7 +153,7 @@ export const AdminNavbar = ({ children }) => {
                   </li>
                 </ul>
               </details>
-            </li>
+            </li> */}
             <li className="nav-item mb-2 px-2">
               <details>
                 <summary className="mb-1">
@@ -153,7 +171,12 @@ export const AdminNavbar = ({ children }) => {
               </details>
             </li>
           </ul>
+          <div className="py-md-5 my-md-5"></div>
+          <div className="py-md-5 my-md-5"></div>
           <hr />
+          <div className="text-center">
+            <span>{formData.name}</span>
+          </div>
         </span>
         <div
           className={`col-md-9 col-12 p-0 ms-md-0 ms-2 bg-light ${

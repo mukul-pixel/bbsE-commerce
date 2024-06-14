@@ -103,7 +103,7 @@ export const AddProduct = () => {
         ))}
         </div>
 
-        <div className="col-md-6 pe-5">
+        <div className="col-md-6 pe-md-5">
           <div className="p-3">
             <label htmlFor="product-name">Product Name</label>
             <input

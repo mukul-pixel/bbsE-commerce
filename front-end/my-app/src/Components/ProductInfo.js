@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import { faPlus, faMinus, faStar, faIndianRupee } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -15,6 +15,7 @@ export const ProductInfo = () => {
   const [pincode, setPincode] = useState('');
   const [availability, setAvailability] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [averageStars,setAverageStars] = useState();
 
   const checkAvailability = async () => {
     setLoading(true);
@@ -146,7 +147,23 @@ export const ProductInfo = () => {
     };
   
     getReviews();
+    // console.log(reviews);
   }, [product]);
+
+  const calculateAverageStars = (reviews) => {
+    if (reviews.length === 0) {
+        return 0; // Return 0 if there are no reviews
+    }
+
+    const totalStars = reviews.reduce((sum, review) => sum + review.selectedStars, 0);
+    const averageStars = totalStars / reviews.length;
+
+    return Math.round(averageStars); // Return the rounded average stars
+};
+    useEffect(() => {
+        const avgStars = calculateAverageStars(reviews);
+        setAverageStars(avgStars);
+    }, [reviews]);
 
   //for write a review section-> open and close
   const toggleModal = () => {
@@ -234,15 +251,14 @@ export const ProductInfo = () => {
             </div>
             <div className="row">
               <div className="col-md-3 col-6">
-                <span className="visually-hidden">Four out of Five Stars</span>
-                {[1, 2, 3, 4].map((index) => (
-                  <FontAwesomeIcon key={index} icon={faStar} />
-                ))}
-                <span className="badge bg-success">61</span>
+              {Array.from({ length: averageStars }, (_, index) => (
+                <FontAwesomeIcon key={index} icon={faStar} />
+            ))}
+                <span className="badge bg-success">{reviews.length}</span>
               </div>
               <div className="col-md-3 col-6">
                 <span
-                  className="monospaced"
+                  className="monospaced btn btn-outline-dark"
                   style={{ fontFamily: "Ubuntu Mono", cursor:"pointer" }}
                   onClick={toggleModal}
                   
@@ -296,12 +312,16 @@ export const ProductInfo = () => {
       )}
               </div>
             </div>
-            <div className="col-md-12 bottom-rule">
-              <h2 className="product-price fs-3">
-                <FontAwesomeIcon className='fs-4 px-2' icon={faIndianRupee} />
-                {product.productPrice}
-              </h2>
+            <div className="row">
+            <div className="col-md-12 mt-3">
+              <p>
+                To order by mobile/price enquiry, {" "}
+                <a className="text-decoration-none" href="tel:7727097954">
+                  please call +91 7727097954
+                </a>
+              </p>
             </div>
+          </div>
           <div className="row">
             <div className="col-md-12 border-bottom my-3"></div>
           </div>
@@ -367,16 +387,6 @@ export const ProductInfo = () => {
     </div>
           <div className="row">
             <div className="col-md-12 border-bottom mt-3"></div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 mt-3">
-              <p>
-                To order by mobile, {" "}
-                <a className="text-decoration-none" href="tel:7727097954">
-                  please call +91 7727097954
-                </a>
-              </p>
-            </div>
           </div>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
