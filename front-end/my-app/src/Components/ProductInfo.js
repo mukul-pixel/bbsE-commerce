@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import { faPlus, faMinus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -56,7 +56,7 @@ export const ProductInfo = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [isHovered, setIsHovered] = useState(false);
     const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
-    const [count,setCount] = useState(1);
+    // const [count,setCount] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedStars, setSelectedStars] = useState(0);
     const [reviewMessage,setReviewMessage] = useState("");
@@ -64,38 +64,39 @@ export const ProductInfo = () => {
     const [reviews, setReviews] = useState([]);
     const [userInfoMap, setUserInfoMap] = useState(new Map());
 
-    const addToCart = async (productId, userId) => {
-      try {
-        console.log(productId);
-        // Send POST request to add product to cart
-        const response = await axios.post('https://bbse-commerce.onrender.com/addToCart', { productId, userId });
-        console.log('Product added to cart:', response.data);
-        // Handle success or update UI accordingly
-      } catch (error) {
-        console.error('Error adding product to cart:', error);
-        // Handle error or show error message to the user
-      }
-    };
+    // const addToCart = async (productId, userId) => {
+    //   try {
+    //     console.log(productId);
+    //     // Send POST request to add product to cart
+    //     const response = await axios.post('https://bbse-commerce.onrender.com/addToCart', { productId, userId });
+    //     console.log('Product added to cart:', response.data);
+    //     // Handle success or update UI accordingly
+    //   } catch (error) {
+    //     console.error('Error adding product to cart:', error);
+    //     // Handle error or show error message to the user
+    //   }
+    // };
   
     // Fetch user information for each review's user ID
-    useEffect((userInfoMap) => {
-       // Function to fetch user information by ID
-    const userInformation = async (userId) => {
-      try {
-        if (!userInfoMap.has(userId)) {
-          const response = await axios.get(`https://bbse-commerce.onrender.com/userInfo/${userId}`);
-          const userData = response.data;
-          setUserInfoMap(prevMap => new Map(prevMap.set(userId, userData)));
-        }
-      } catch (error) {
-        console.error('Error fetching user information:', error);
-      }
-    };
+    useEffect(() => {
+      const fetchUserInfo = async (userId) => {
+          try {
+              if (!userInfoMap.has(userId)) {
+                  const response = await axios.get(`https://bbse-commerce.onrender.com/userInfo/${userId}`);
+                  const userData = response.data;
+                  setUserInfoMap(prevMap => new Map(prevMap.set(userId, userData)));
+              }
+          } catch (error) {
+              console.error('Error fetching user information:', error);
+          }
+      };
 
-      reviews.forEach(review => {
-        userInformation(review.userId);
-      });
-    }, [reviews]);
+      if (reviews.length > 0) {
+          reviews.forEach(review => {
+              fetchUserInfo(review.userId);
+          });
+      }
+  }, [reviews, userInfoMap]);
   
 
     //to handle star rating by storing number of stars
@@ -171,16 +172,16 @@ export const ProductInfo = () => {
   };
 
     //to decrement the quantity count
-    const handleDecrement = () => {
-      if (count > 1) {
-        setCount(prevCount => prevCount - 1);
-      }
-    };
+    // const handleDecrement = () => {
+    //   if (count > 1) {
+    //     setCount(prevCount => prevCount - 1);
+    //   }
+    // };
 
-    // to increment the quantity count
-    const handleIncrement = () => {
-      setCount(prevCount => prevCount + 1);
-    };
+    // // to increment the quantity count
+    // const handleIncrement = () => {
+    //   setCount(prevCount => prevCount + 1);
+    // };
     
     // Function to handle mouse move event for image zoom
     const handleMouseMove = (e) => {
@@ -244,18 +245,15 @@ export const ProductInfo = () => {
                 No. {product._id}
               </span>
             </div>
-            <div className="col-md-12">
-              <p className="description">
-                {product.productDescription}
-              </p>
-            </div>
             <div className="row">
+            {reviews.length === 0 ? "" :
               <div className="col-md-3 col-6">
               {Array.from({ length: averageStars }, (_, index) => (
                 <FontAwesomeIcon key={index} icon={faStar} />
             ))}
                 <span className="badge bg-success">{reviews.length}</span>
               </div>
+              }
               <div className="col-md-3 col-6">
                 <span
                   className="monospaced btn btn-outline-dark"
@@ -325,7 +323,7 @@ export const ProductInfo = () => {
           <div className="row">
             <div className="col-md-12 border-bottom my-3"></div>
           </div>
-          <div className="row add-to-cart">
+          {/* <div className="row add-to-cart">
             <div className="col-md-5 col-5 product-qty d-flex mx-md-auto">
               <button className="btn btn-outline-secondary btn-lg btn-qty m-1" onClick={handleDecrement} disabled={count === 1 ? true : false}>
               <FontAwesomeIcon icon={faMinus} />
@@ -348,8 +346,8 @@ export const ProductInfo = () => {
                 Add to Cart
               </button>
             </div>
-          </div>
-          <div className="row mx-auto ps-5">
+          </div> */}
+          {/* <div className="row mx-auto ps-5">
             <div className="col-md-4 col-4 text-center">
               <span
                 className="monospaced mx-auto pe-md-5"
@@ -367,7 +365,7 @@ export const ProductInfo = () => {
                 Add to Shopping List
               </a>
             </div>
-          </div>
+          </div> */}
           <div className="container p-2">
       <div className="row d-flex p-3 mx-auto">
         <input
@@ -388,7 +386,7 @@ export const ProductInfo = () => {
           <div className="row">
             <div className="col-md-12 border-bottom mt-3"></div>
           </div>
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <ul className="nav nav-tabs pt-2" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
               <a
                 className="nav-link active"
@@ -400,19 +398,6 @@ export const ProductInfo = () => {
                 aria-selected="true"
               >
                 Description
-              </a>
-            </li>
-            <li className="nav-item" role="presentation">
-              <a
-                className="nav-link"
-                id="features-tab"
-                data-bs-toggle="tab"
-                href="#features"
-                role="tab"
-                aria-controls="features"
-                aria-selected="false"
-              >
-                Features
               </a>
             </li>
             <li className="nav-item" role="presentation">
@@ -435,9 +420,6 @@ export const ProductInfo = () => {
                 {product.productDescription}
               </p>
             </div>
-            <div role="tabpanel" className="tab-pane top-10" id="features">
-              ...
-            </div>
             <div role="tabpanel" className="tab-pane" id="reviews">
             {/* <span className="visually-hidden">
             {review.selectedStars} out of Five Stars
@@ -447,31 +429,34 @@ export const ProductInfo = () => {
           ))}
           <span className="badge bg-success">{review.selectedStars}</span> */}
             <div className="row">
-      {reviews.map((review, index) => (
-        <div key={index} className="col-md-12">
-          <div className="card mt-3">
-            <div className="card-header">
-              {userInfoMap.has(review.userId) && (
-                <div className='row'>
-                  <img className='col-md-1 col-2' style={{borderRadius:"50%",height:"30px",width:"55px"}} src={userInfoMap.get(review.userId).imageSrc} alt={userInfoMap.get(review.userId).name} />
-                  <span className='col-5'>{userInfoMap.get(review.userId).name}</span>
-                  <span className="visually-hidden">
-                  {review.selectedStars} out of Five Stars
-                  </span>
-                  <span className='col-5'>
-                  {[...Array(review.selectedStars)].map((_, starIndex) => (
-            <FontAwesomeIcon key={starIndex} icon={faStar} />
-          ))}
-                  </span>
+            {reviews.map((review, index) => (
+                <div key={index} className="col-md-12">
+                    <div className="card mt-3">
+                        <div className="card-header">
+                            {userInfoMap && userInfoMap.has(review.userId) && (
+                                <div className='d-flex'>
+                                    <img
+                                        className='px-1 me-2'
+                                        style={{ borderRadius: "50%", height: "30px", width: "55px" }}
+                                        src={userInfoMap.get(review.userId).imageSrc}
+                                        alt={userInfoMap.get(review.userId).name}
+                                    /> 
+                                    <span className=''>{userInfoMap.get(review.userId).name}</span>
+                                    <span className='ms-2'>
+                                        {[...Array(review.selectedStars)].map((_, starIndex) => (
+                                            <FontAwesomeIcon key={starIndex} icon={faStar} />
+                                        ))}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        <div className="card-body">
+                            <h5 className="card-title">{review.reviewHeading}</h5>
+                            <p className="card-text">{review.reviewMessage}</p>
+                        </div>
+                    </div>
                 </div>
-              )}
-            </div>
-            <div className="card-body">
-              <p className="card-text">{review.reviewMessage}</p>
-            </div>
-          </div>
-        </div>
-      ))}
+            ))}
     </div>
             </div>
           </div>

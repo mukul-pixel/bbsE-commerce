@@ -1,9 +1,27 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Services } from './Services';
+import axios from 'axios';
 
 export const Categories = () => {
     const [showModal, setShowModal] = useState(false);
+    const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async () => {
+    console.log(name,email)
+    try {
+      const response = await axios.post('https://bbse-commerce.onrender.com/subscribe', {
+        name,
+        email
+      });
+      console.log('Subscription successful:', response.data);
+      // Handle success: show a success message or redirect if needed
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      // Handle error: show an error message or retry logic
+    }
+  };
 
     const toggleModal = () => {
         setShowModal(prevState => !prevState);
@@ -84,27 +102,41 @@ export const Categories = () => {
       {showModal && (
         <div className="modal fade show" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
         <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div className="modal-content modalSubscribe">
-          <div className='text-end'>
-          <button type="button" className="btn-close bg-light m-2" onClick={toggleModal}></button>
-          </div>
-            <div className="modal-body text-white text-center">
-            <span className='fs-3'>Craft your perfect look with precision.</span>
-            <br/>
-            <span className='fs-5'>Subscribe now to unlock insider access to our latest arrivals and exclusive offers.</span>
+        <div className="modal-content modalSubscribe">
+      <div className='text-end'>
+        <button type="button" className="btn-close bg-light m-2" onClick={toggleModal}></button>
+      </div>
+      <div className="modal-body text-white text-center">
+        <span className='fs-3'>Craft your perfect look with precision.</span>
+        <br />
+        <span className='fs-5'>Subscribe now to unlock insider access to our latest arrivals and exclusive offers.</span>
 
-              <form className='p-3'>
-                <div className="mb-3">
-                  <input type="name" className="form-control mb-1" id="name-input" placeholder="Name"/>
-                  <input type="email" className="form-control" id="email-input" placeholder="Mail"/>
-                </div>
-              </form>
-              <span className='fs-5'>Seize the opportunity – subscribe today and elevate your stitching game!</span>
-            </div>
-              <div className='p-4'>
-              <button type="button" className="btn btn-light form-control">Submit</button>
-              </div>
+        <form className='p-3'>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control mb-1"
+              id="name-input"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="email"
+              className="form-control"
+              id="email-input"
+              placeholder="Mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
+          <span className='fs-5'>Seize the opportunity – subscribe today and elevate your stitching game!</span>
+        </form>
+      </div>
+      <div className='p-4'>
+        <button type="button" className="btn btn-light form-control" onClick={handleSubmit}>Submit</button>
+      </div>
+    </div>
         </div>
       </div>
       

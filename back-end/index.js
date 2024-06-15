@@ -9,6 +9,7 @@ const path = require('path');
 const Product = require("./models/productModel");
 const Review = require('./models/reviewModel');
 const Cart = require("./models/cartModel");
+const Subscriber = require('./models/subscribeModel'); 
 const { MongoClient } = require('mongodb');
 const { uploadOnCloudinary } = require('./cloudinary');
 require("dotenv").config();
@@ -82,7 +83,36 @@ app.post("/register", async (req, res) => {
     } catch (err) {
         res.status(500).json("Internal server error");
     }
+});
 
+app.post('/subscribe', async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    console.log(req.body);
+    // Check if email already exists in database
+    const existingSubscriber = await Subscriber.findOne({ email });
+
+    if (existingSubscriber) {
+      return res.status(400).json({ message: 'Email already subscribed' });
+    }
+
+    // Create new subscriber instance
+    const newSubscriber = new Subscriber({
+      name,
+      email
+    });
+
+    // Save subscriber to database
+    const savedSubscriber = await newSubscriber.save();
+
+    console.log(`New subscription: Name - ${name}, Email - ${email}`);
+
+    res.status(200).json({ message: 'Subscription successful!', subscriber: savedSubscriber });
+  } catch (error) {
+    console.error('Error subscribing:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 //api for profile
