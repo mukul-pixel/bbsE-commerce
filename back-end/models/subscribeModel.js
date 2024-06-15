@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const subscriberSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true } // Unique email constraint
+  email: { type: String, required: true, unique: true }, // Unique email constraint
+  mobile: { type: Number, required: true }
 });
 
 // Create Subscriber model based on schema

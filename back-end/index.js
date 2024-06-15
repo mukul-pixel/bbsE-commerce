@@ -87,7 +87,7 @@ app.post("/register", async (req, res) => {
 
 app.post('/subscribe', async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email,mobile } = req.body;
 
     console.log(req.body);
     // Check if email already exists in database
@@ -100,13 +100,14 @@ app.post('/subscribe', async (req, res) => {
     // Create new subscriber instance
     const newSubscriber = new Subscriber({
       name,
-      email
+      email,
+      mobile
     });
 
     // Save subscriber to database
     const savedSubscriber = await newSubscriber.save();
 
-    console.log(`New subscription: Name - ${name}, Email - ${email}`);
+    console.log(`New subscription: Name - ${name}, Email - ${email}, Mobile - ${mobile}`);
 
     res.status(200).json({ message: 'Subscription successful!', subscriber: savedSubscriber });
   } catch (error) {

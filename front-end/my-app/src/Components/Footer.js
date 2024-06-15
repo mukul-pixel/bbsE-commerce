@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 
 export const Footer = () => {
@@ -23,49 +24,21 @@ export const Footer = () => {
               <hr className="border-4 w-25" />
               <ul className="list-unstyled">
                 <li>
-                  <span to="/" className="link text-decoration-none text-white">
+                  <NavLink to="/about" className="link text-decoration-none text-white">
                     About Us
-                  </span>
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/about"
-                    className="link text-decoration-none text-white"
-                  >
-                    Privacy Policy
-                  </span>
+                <a href="#homecat" className="link text-decoration-none text-white">
+                  Services</a>
                 </li>
                 <li>
-                  <span
-                    to="/category"
-                    className="link text-decoration-none text-white"
-                  >
-                    Shipping & Return Policy
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Terms & Conditions
-                  </span>
-                </li>
-                <li>
-                  <span
+                <NavLink
                     to="/contact"
                     className="link text-decoration-none text-white"
                   >
                     Contact Us
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Blogs
-                  </span>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -74,65 +47,33 @@ export const Footer = () => {
               <hr className="border-4 w-25" />
               <ul className="list-unstyled">
                 <li>
-                  <span to="/" className="link text-decoration-none text-white">
-                    Embroidery Material
-                  </span>
+                  <NavLink to="/products?category=thread" className="link text-decoration-none text-white">
+                    Thread
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/about"
+                  <NavLink
+                    to="/products?category=embellishment"
                     className="link text-decoration-none text-white"
                   >
                     Embellishments
-                  </span>
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/category"
+                  <NavLink
+                    to="/products?category=toolsAndAccessories"
                     className="link text-decoration-none text-white"
                   >
-                    Tailoring Material
-                  </span>
+                    Tools &amp; Accessories
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/contact"
+                  <NavLink
+                    to="/products?category=button"
                     className="link text-decoration-none text-white"
                   >
-                    Laces Borders
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Brooches
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Stones
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Patches
-                  </span>
-                </li>
-                <li>
-                  <span
-                    to="/contact"
-                    className="link text-decoration-none text-white"
-                  >
-                    Metal Buttons
-                  </span>
+                    Buttons
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -141,33 +82,34 @@ export const Footer = () => {
               <hr className="border-4 w-25" />
               <ul className="list-unstyled">
                 <li>
-                  <span to="/" className="link text-decoration-none text-white">
+                  <NavLink to="/" className="link text-decoration-none text-white">
                     Home
-                  </span>
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/about"
+                  <NavLink
+                    to="/products"
                     className="link text-decoration-none text-white"
                   >
-                    About
-                  </span>
+                    Products
+                  </NavLink>
                 </li>
                 <li>
-                  <span
-                    to="/category"
+                  <NavLink
+                    to="/profile"
                     className="link text-decoration-none text-white"
                   >
-                    Services
-                  </span>
+                    Profile
+                  </NavLink>
                 </li>
+                
                 <li>
-                  <span
-                    to="/contact"
+                  <NavLink
+                    to="/login"
                     className="link text-decoration-none text-white"
                   >
-                    Contact
-                  </span>
+                    Login
+                  </NavLink>
                 </li>
               </ul>
             </div>

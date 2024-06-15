@@ -2,25 +2,33 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Services } from './Services';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Categories = () => {
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState();
+  console.log(mobile);
 
   const handleSubmit = async () => {
-    console.log(name,email)
     try {
       const response = await axios.post('https://bbse-commerce.onrender.com/subscribe', {
         name,
-        email
+        email,
+        mobile
       });
+      toast.success(`Subscription Successfull ${name}`);
       console.log('Subscription successful:', response.data);
+      
       // Handle success: show a success message or redirect if needed
     } catch (error) {
       console.error('Error subscribing:', error);
+      toast.error('User Already Exists. Please login.');
       // Handle error: show an error message or retry logic
     }
+    toggleModal();
   };
 
     const toggleModal = () => {
@@ -28,6 +36,7 @@ export const Categories = () => {
       };
   return (
     <>
+    <ToastContainer />
     <section id="homecat" className="homecat_wrapper">
         <div className="container">
             <div className="row">
@@ -82,7 +91,7 @@ export const Categories = () => {
             </div>
         </div>
     </section>
-    <Services/>
+    <Services id="services"/>
     <div className="subscibe_section pt-4 wow fadeInUp">
         <div className="container">
             <div className="fsubouter">
@@ -123,11 +132,19 @@ export const Categories = () => {
             />
             <input
               type="email"
-              className="form-control"
+              className="form-control mb-1"
               id="email-input"
               placeholder="Mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              className="form-control"
+              id="mobile-input"
+              placeholder="Mobile"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
             />
           </div>
           <span className='fs-5'>Seize the opportunity – subscribe today and elevate your stitching game!</span>
