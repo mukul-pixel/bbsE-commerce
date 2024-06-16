@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 export const AddProduct = () => {
@@ -35,72 +35,80 @@ export const AddProduct = () => {
       setProductPrice(value);
     } else if (name === "product-category") {
       setProductCategory(value);
-    }else if (name === "product-subcategory") {
+    } else if (name === "product-subcategory") {
       setProductSubCategory(value);
     } else if (name === "product-quantity") {
       setProductQuantity(value);
-    } else if(name === "product-material") {
+    } else if (name === "product-material") {
       setProductMaterial(value);
     }
   };
+
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
-    const fileInputs = e.target.querySelectorAll('input[type="file"]');
 
     // Append each selected file to the FormData object
-    fileInputs.forEach((input) => {
-      const files = input.files;
-      for (let i = 0; i < files.length; i++) {
-        formData.append('images', files[i]);
+    selectedImages.forEach((image, index) => {
+      if (image) {
+        const file = e.target.querySelector(`#imageInput${index + 1}`).files[0];
+        if (file) {
+          formData.append("images", file);
+        }
       }
     });
 
     // Append other form data
-    formData.append('productName', productName);
-    formData.append('productDescription', productDescription);
-    formData.append('productPrice', productPrice);
-    formData.append('productSubCategory',productSubCategory)
-    formData.append('productCategory',productCategory);
-    formData.append('productQuantity',productQuantity);
-    formData.append('productMaterial',productMaterial);
+    formData.append("productName", productName);
+    formData.append("productDescription", productDescription);
+    formData.append("productPrice", productPrice);
+    formData.append("productCategory", productCategory);
+    formData.append("productSubCategory", productSubCategory);
+    formData.append("productQuantity", productQuantity);
+    formData.append("productMaterial", productMaterial);
+
+    // Log formData to check if values are appended correctly
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0] + ": " + pair[1]);
+    // }
 
     try {
       // Send POST request using FormData
-      const response = await axios.post('https://bbse-commerce.onrender.com/addProduct', formData, {
+      const response = await axios.post("https://bbse-commerce.onrender.com/addProduct", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
       console.log(response.data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
+
   return (
     <>
-      <div className='bg-black p-3 text-center text-white fs-3'>ADD A PRODUCT</div>
+      <div className="bg-black p-3 text-center text-white fs-3">ADD A PRODUCT</div>
       <form onSubmit={handleSubmit} className="row">
         <div className="col-md-4 col-12 probox">
-        {selectedImages.map((image, index) => (
-          // <span className="d-flex flex-column justify-content-center">
-          <label key={index} htmlFor={`imageInput${index + 1}`} className="select-image-box m-2 col-md-5 col-5 border">
-            {image ? (
-              <img src={image} alt={`Selected ${index + 1}`} className="h-100 w-100" style={{aspectRatio:"1/1" }} />
-            ) : (
-              <div className="p-5 text-center">
-                <span>ADD { index + 1 }</span>
-              </div>
-            )}
-            <input
-              className='p-3 d-none'
-              id={`imageInput${index + 1}`}
-              type='file'
-              name='images'
-              accept='image/*'
-              onChange={(e) => handleImageSelect(e, index)}
-            />
-          </label>
-        ))}
+          {selectedImages.map((image, index) => (
+            <label key={index} htmlFor={`imageInput${index + 1}`} className="select-image-box m-2 col-md-5 col-5 border">
+              {image ? (
+                <img src={image} alt={`Selected ${index + 1}`} className="h-100 w-100" style={{ aspectRatio: "1/1" }} />
+              ) : (
+                <div className="p-5 text-center">
+                  <span>ADD {index + 1}</span>
+                </div>
+              )}
+              <input
+                className="p-3 d-none"
+                id={`imageInput${index + 1}`}
+                type="file"
+                name="images"
+                accept="image/*"
+                onChange={(e) => handleImageSelect(e, index)}
+              />
+            </label>
+          ))}
         </div>
 
         <div className="col-md-6 pe-md-5">
@@ -140,21 +148,21 @@ export const AddProduct = () => {
           <div className="p-3">
             <label htmlFor="product-category">Product Category</label>
             <select
-        id="product-category"
-        name="product-category"
-        className="ms-5"
-        value={productCategory}
-        onChange={handleInputChange}
-      >
-        <option value="">Select a category</option>
-        <option value="threads">Thread</option>
-        <option value="embellishments">Embellishment</option>
-        <option value="tools&accessories">Tools & Accessories</option>
-        <option value="buttons">Button</option>
-      </select>
+              id="product-category"
+              name="product-category"
+              className="ms-5"
+              value={productCategory}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a category</option>
+              <option value="thread">Thread</option>
+              <option value="embellishments">Embellishments</option>
+              <option value="tools&accessories">Tools & Accessories</option>
+              <option value="button">Button</option>
+            </select>
           </div>
           <div className="p-3">
-            <label htmlFor="product-subcategory">Product Category</label>
+            <label htmlFor="product-subcategory">Product Sub-Category</label>
             <input
               id="product-subcategory"
               name="product-subcategory"

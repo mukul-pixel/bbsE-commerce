@@ -192,7 +192,7 @@ app.use('/Images', express.static(path.join(__dirname, 'Images')));
 app.post("/addProduct", upload.array('images', 4), async (req, res) => {
   try {
       // Extract product details from the request body
-      const { productName, productPrice, productDescription, productCategory, productQuantity, productMaterial } = req.body;
+      const { productName, productPrice, productDescription, productCategory, productSubCategory, productMaterial, productQuantity } = req.body;
 
       // Extract filenames of the uploaded images from req.files object
       const imageFiles = req.files;
@@ -211,13 +211,13 @@ app.post("/addProduct", upload.array('images', 4), async (req, res) => {
             console.error("Error uploading file to Cloudinary:", file.filename, error);
         }
     }
-
       // Create a new product instance
       const newProduct = await Product.create({
           productName,
           productPrice,
           productDescription,
           productCategory,
+          productSubCategory,
           productQuantity,
           productMaterial,
           images: imageUrls // Save the Cloudinary URLs in the 'images' field
