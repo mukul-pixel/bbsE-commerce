@@ -8,6 +8,9 @@ const productSchema = new mongoose.Schema({
     productDescription: {
         type: String,
     },
+    productFeatures: [{
+        type: String,
+    }],
     productPrice: {
         type: Number,
         required: true
@@ -17,7 +20,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     productSubCategory: {
-        type:String,
+        type: String,
         required: true
     },
     productQuantity: {
@@ -36,7 +39,6 @@ const productSchema = new mongoose.Schema({
         default: Date.now
     }
 });
-
 
 const Product = mongoose.model('Product', productSchema);
 

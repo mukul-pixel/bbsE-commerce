@@ -416,9 +416,18 @@ export const ProductInfo = () => {
           </ul>
           <div className="tab-content">
             <div role="tabpanel" className="tab-pane active" id="description">
-              <p className="top-10 p-4" style={{ fontFamily: "sans-serif"}} >
+              <p className="top-10 p-4 fs-5" style={{ fontFamily: "sans-serif"}} >
                 {product.productDescription}
               </p>
+              <p className='fw-bold fs-5'>Features:</p>
+              <br/>
+              <ul className="fs-5">
+    { (
+      product.productFeatures.map((feature, index) => (
+        <li key={index}>{feature}</li>
+      ))
+    )}
+  </ul>
             </div>
             <div role="tabpanel" className="tab-pane" id="reviews">
             {/* <span className="visually-hidden">

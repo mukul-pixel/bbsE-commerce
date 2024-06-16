@@ -189,47 +189,50 @@ const upload = multer({ storage: storage });
 app.use('/Images', express.static(path.join(__dirname, 'Images')));
 
 // API endpoint to add a product
-app.post("/addProduct", upload.array('images', 4), async (req, res) => {
+app.post("/addProduct", upload.array("images", 4), async (req, res) => {
   try {
-      // Extract product details from the request body
-      const { productName, productPrice, productDescription, productCategory, productSubCategory, productMaterial, productQuantity } = req.body;
+    const {
+      productName,
+      productPrice,
+      productDescription,
+      productCategory,
+      productSubCategory,
+      productMaterial,
+      productQuantity,
+      productFeatures
+    } = req.body;
 
-      // Extract filenames of the uploaded images from req.files object
-      const imageFiles = req.files;
+    const imageFiles = req.files;
+    const imageUrls = [];
 
-      // Upload images to Cloudinary and retrieve their public URLs
-      const imageUrls = [];
-      for (const file of imageFiles) {
-        try {
-            const response = await uploadOnCloudinary(file.path);
-            if (response && response.url) {
-                imageUrls.push(response.url); // Add Cloudinary URL to the array
-            } else {
-                console.error("No URL returned from Cloudinary for file:", file.filename);
-            }
-        } catch (error) {
-            console.error("Error uploading file to Cloudinary:", file.filename, error);
+    for (const file of imageFiles) {
+      try {
+        const response = await uploadOnCloudinary(file.path);
+        if (response && response.url) {
+          imageUrls.push(response.url);
+        } else {
+          console.error("No URL returned from Cloudinary for file:", file.filename);
         }
+      } catch (error) {
+        console.error("Error uploading file to Cloudinary:", file.filename, error);
+      }
     }
-      // Create a new product instance
-      const newProduct = await Product.create({
-          productName,
-          productPrice,
-          productDescription,
-          productCategory,
-          productSubCategory,
-          productQuantity,
-          productMaterial,
-          images: imageUrls // Save the Cloudinary URLs in the 'images' field
-      });
 
-      // Save the new product to the database
-      await newProduct.save();
+    const newProduct = await Product.create({
+      productName,
+      productPrice,
+      productDescription,
+      productCategory,
+      productSubCategory,
+      productMaterial,
+      productQuantity,
+      productFeatures: Array.isArray(productFeatures) ? productFeatures : [productFeatures],
+      images: imageUrls
+    });
 
-      res.status(201).json({ data: newProduct, message: 'Product added' });
+    res.status(201).json(newProduct);
   } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: "Error adding product" });
   }
 });
 

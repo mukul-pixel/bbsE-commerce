@@ -9,6 +9,7 @@ export const AddProduct = () => {
   const [productSubCategory, setProductSubCategory] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [productMaterial, setProductMaterial] = useState("");
+  const [productFeatures, setProductFeatures] = useState(["", "", "", ""]); // Initialize an array of 4 features
 
   const [selectedImages, setSelectedImages] = useState(Array(4).fill(null));
 
@@ -44,8 +45,15 @@ export const AddProduct = () => {
     }
   };
 
+  const handleFeatureChange = (event, index) => {
+    const updatedFeatures = [...productFeatures];
+    updatedFeatures[index] = event.target.value;
+    setProductFeatures(updatedFeatures);
+    console.log(updatedFeatures)
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const formData = new FormData();
 
     // Append each selected file to the FormData object
@@ -67,14 +75,13 @@ export const AddProduct = () => {
     formData.append("productQuantity", productQuantity);
     formData.append("productMaterial", productMaterial);
 
-    // Log formData to check if values are appended correctly
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + ": " + pair[1]);
-    // }
+    // Append product features
+    productFeatures.forEach((feature, index) => {
+      formData.append(`productFeatures[${index}]`, feature);
+    });
 
     try {
-      // Send POST request using FormData
-      const response = await axios.post("https://bbse-commerce.onrender.com/addProduct", formData, {
+      const response = await axios.post("http://localhost:5000/addProduct", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -128,11 +135,25 @@ export const AddProduct = () => {
             <textarea
               id="product-description"
               name="product-description"
-              className="form-control"
+              className="form-control mb-2"
               type="text"
               value={productDescription}
               onChange={handleInputChange}
             />
+            Features
+            {productFeatures.map((feature, index) => (
+              <div key={index} className="p-3">
+                <label htmlFor={`product-feature-${index}`}>Product Feature {index + 1}</label>
+                <input
+                  id={`product-feature-${index}`}
+                  name={`product-feature-${index}`}
+                  className="form-control"
+                  type="text"
+                  value={feature}
+                  onChange={(e) => handleFeatureChange(e, index)}
+                />
+              </div>
+            ))}
           </div>
           <div className="p-3">
             <label htmlFor="product-price">Product Price</label>
