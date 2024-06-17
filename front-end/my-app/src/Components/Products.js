@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -150,11 +151,11 @@ export const Products = () => {
                                     <ul className="mb-2 list-unstyled ps-4 fs-6">
                                         <li>
                                             <input type="checkbox" id="cotton" name="productMaterial" onChange={handleCheckboxChange} />
-                                            <label htmlFor="Cotton" className="text-dark">Cotton</label>
+                                            <label htmlFor="cotton" className="text-dark">Cotton</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="polyster" name="productMaterial" onChange={handleCheckboxChange} />
-                                            <label htmlFor="Polyster" className="text-dark">Polyster</label>
+                                            <label htmlFor="polyster" className="text-dark">Polyster</label>
                                         </li>
                                     </ul>
                                 </details>
@@ -207,11 +208,11 @@ export const Products = () => {
                                             <ul className="mb-2 list-unstyled ps-4 fs-6">
                                                 <li>
                                                     <input type="checkbox" id="cotton" name="productMaterial" onChange={handleCheckboxChange} />
-                                                    <label htmlFor="Cotton" className="text-dark">Cotton</label>
+                                                    <label htmlFor="cotton" className="text-dark">Cotton</label>
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" id="polyster" name="productMaterial" onChange={handleCheckboxChange} />
-                                                    <label htmlFor="Polyester" className="text-dark">Polyster</label>
+                                                    <label htmlFor="polyster" className="text-dark">Polyster</label>
                                                 </li>
                                             </ul>
                                         </details>

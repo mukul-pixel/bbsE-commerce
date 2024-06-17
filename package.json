@@ -10,6 +10,7 @@
         "eject": "cd front-end/my-app && npm run eject"
     },
     "dependencies": {
+        "axios": "^1.7.2",
         "cloudinary": "^2.2.0",
         "dotenv": "^16.4.5",
         "swiper": "^11.1.4"

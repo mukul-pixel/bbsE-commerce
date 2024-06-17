@@ -16,10 +16,29 @@ import { AdminViewProduct } from "./Pages/AdminViewProduct";
 import { AdminViewUser } from "./Pages/AdminViewUser";
 import { Checkout } from "./Components/Checkout";
 import { UserProducts } from "./Pages/UserProducts";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   // const role = localStorage.getItem("role");
+  const [products, setProducts] = useState(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get("https://bbse-commerce.onrender.com/getProduct");
+                if (response.data.status === "ok") {
+                    setProducts(response.data.data);
+                } else {
+                    console.error("Error fetching product data:", response.data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching product data:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
   return (
     <Router>
       <Routes>
@@ -40,7 +59,7 @@ function App() {
         <Route path="viewproduct" element={<AdminViewProduct/>}></Route>
         <Route path="viewuser" element={<AdminViewUser/>}></Route>
         <Route path="checkout" element={<Checkout/>}></Route>
-        <Route path="products" element={<UserProducts/>}></Route>
+        <Route path="products" element={<UserProducts products={products}/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
         </>
         {/* </>:

@@ -8,7 +8,7 @@ import logoImage1 from '../../src/images/R.jpeg';
 function VideoSlide({ src, alt }) {
     return (
       <div className="carousel-video-slide">
-        <video autoPlay loop muted className="d-block w-100">
+        <video autoPlay loop muted className="w-100">
           <source src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
