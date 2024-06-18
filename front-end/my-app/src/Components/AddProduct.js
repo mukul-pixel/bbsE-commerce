@@ -12,6 +12,7 @@ export const AddProduct = () => {
   const [productFeatures, setProductFeatures] = useState(["", "", "", ""]); // Initialize an array of 4 features
 
   const [selectedImages, setSelectedImages] = useState(Array(4).fill(null));
+  const [loading, setLoading] = useState(false);
 
   const handleImageSelect = (event, index) => {
     const file = event.target.files[0];
@@ -53,7 +54,8 @@ export const AddProduct = () => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
 
     // Append each selected file to the FormData object
@@ -79,7 +81,7 @@ export const AddProduct = () => {
     productFeatures.forEach((feature, index) => {
       formData.append(`productFeatures[${index}]`, feature);
     });
-
+    console.log(formData);
     try {
       const response = await axios.post("https://bbse-commerce.onrender.com/addProduct", formData, {
         headers: {
@@ -87,8 +89,13 @@ export const AddProduct = () => {
         },
       });
       console.log(response.data);
+      alert("Product added successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
+      alert("Failed to add product.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -217,8 +224,8 @@ export const AddProduct = () => {
           </div>
 
           <div className="p-3">
-            <button className="btn btn-outline-dark px-4" type="submit">
-              Save
+          <button className="btn btn-outline-dark px-4" type="submit">
+              {loading ? "Submitting..." : "Save"}
             </button>
           </div>
         </div>

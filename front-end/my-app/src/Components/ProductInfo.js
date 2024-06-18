@@ -4,7 +4,7 @@ import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -202,8 +202,8 @@ export const ProductInfo = () => {
       {product ? (
         <div className="row">
           <div className="col-md-6">
-          <div id='productImgs' className="row ms-md-0 ms-lg-1 ms-3">
-              <div className="col-md-2 col-2 me-md-0 me-2">
+          <div id='productImgs' className="row ms-md-0 ms-lg-1 ms-md-3">
+              <div className="col-md-2 d-md-block d-none col-0 me-md-0 me-2">
                 {product.images.map((image, index) => (
                   <img
                     key={index}
@@ -217,7 +217,7 @@ export const ProductInfo = () => {
                 ))}
               </div>
               <div
-                className="col-md-10 col-10 ps-md-5 ps-0 h-75 w-75 me-2 image-container"
+                className="col-md-10 col-12 ps-md-5 ps-0 h-75 w-75 me-2 ms-md-0 ms-5 image-container"
                 onMouseMove={handleMouseMove}
               >
                 <img
@@ -230,7 +230,21 @@ export const ProductInfo = () => {
                     style={{ transformOrigin: `${zoomPosition.x * 100}% ${zoomPosition.y * 100}%`,aspectRatio:"1/1"}}
                 />
               </div>
+              <div className="row d-md-none d-flex m-2 justify-content-center">
+                {product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={`${image}`}
+                    alt={`Product pic ${index + 1}`}
+                    className="img-fluid py-2 col-3"
+                    onClick={() => handleImageChange(image)}
+                    onMouseOver={() => handleImageChange(image)}
+                    style={{aspectRatio:"1/1"}}
+                  />
+                ))}
+              </div>
             </div>
+
           </div>
           <div className="col-md-6 py-md-0 py-5 ">
             <div className="col-md-12">
@@ -247,14 +261,14 @@ export const ProductInfo = () => {
             </div>
             <div className="row">
             {reviews.length === 0 ? "" :
-              <div className="col-md-3 col-6">
+              <div className="col-6">
               {Array.from({ length: averageStars }, (_, index) => (
                 <FontAwesomeIcon key={index} icon={faStar} />
             ))}
                 <span className="badge bg-success">{reviews.length}</span>
               </div>
               }
-              <div className="col-md-3 col-6">
+              <div className="col-6">
                 <span
                   className="monospaced btn btn-outline-dark"
                   style={{ fontFamily: "Ubuntu Mono", cursor:"pointer" }}
@@ -312,12 +326,15 @@ export const ProductInfo = () => {
             </div>
             <div className="row">
             <div className="col-md-12 mt-3">
-              <p>
+              <p className='m-0'>
                 To order by mobile/price enquiry, {" "}
                 <a className="text-decoration-none" href="tel:7727097954">
                   please call +91 7727097954
                 </a>
               </p>
+              <span>OR</span>
+              <br/>
+              <NavLink to='/contact' className="text-decoration-none">fill a form here,</NavLink> We'll contact you shortly.
             </div>
           </div>
           <div className="row">

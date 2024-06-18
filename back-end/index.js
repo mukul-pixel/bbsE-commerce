@@ -202,6 +202,8 @@ app.post("/addProduct", upload.array("images", 4), async (req, res) => {
       productFeatures
     } = req.body;
 
+    console.log(req.body);
+
     const imageFiles = req.files;
     const imageUrls = [];
 
@@ -332,35 +334,35 @@ app.post('/addReview', async (req, res) => {
   });
 
   // POST /api/cart/add - Add product to cart
-app.post('/addToCart', async (req, res) => {
-    try {
-      const { productId, userId } = req.body;
+// app.post('/addToCart', async (req, res) => {
+//     try {
+//       const { productId, userId } = req.body;
   
-      // Find the user's cart or create a new one if it doesn't exist
-      let cart = await Cart.findOne({ userId });
-      if (!cart) {
-        cart = await Cart.create({ userId, items: [] });
-      }
+//       // Find the user's cart or create a new one if it doesn't exist
+//       let cart = await Cart.findOne({ userId });
+//       if (!cart) {
+//         cart = await Cart.create({ userId, items: [] });
+//       }
   
-      // Check if the product is already in the cart
-      const existingItemIndex = cart.items.findIndex(item => item.productId.toString() === productId.toString());
-      if (existingItemIndex !== -1) {
-        // If the product is already in the cart, increase its quantity
-        cart.items[existingItemIndex].quantity++;
-      } else {
-        // If the product is not in the cart, add it with quantity 1
-        cart.items.push({ productId, quantity: 1 });
-      }
+//       // Check if the product is already in the cart
+//       const existingItemIndex = cart.items.findIndex(item => item.productId.toString() === productId.toString());
+//       if (existingItemIndex !== -1) {
+//         // If the product is already in the cart, increase its quantity
+//         cart.items[existingItemIndex].quantity++;
+//       } else {
+//         // If the product is not in the cart, add it with quantity 1
+//         cart.items.push({ productId, quantity: 1 });
+//       }
   
-      // Save the updated cart to the database
-      await cart.save();
+//       // Save the updated cart to the database
+//       await cart.save();
   
-      res.json({ success: true, message: 'Product added to cart' });
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-      res.status(500).json({ success: false, error: 'Failed to add product to cart' });
-    }
-  });
+//       res.json({ success: true, message: 'Product added to cart' });
+//     } catch (error) {
+//       console.error('Error adding product to cart:', error);
+//       res.status(500).json({ success: false, error: 'Failed to add product to cart' });
+//     }
+//   });
 
   //api to get product details for the cart
   app.get('/products/:productId', async (req, res) => {
