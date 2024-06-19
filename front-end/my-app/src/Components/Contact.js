@@ -1,15 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Contact = () => {
     const phoneNumber = "+917727097954";
     const phoneNumber2 = "+919414269086";
     const email = "viivveek4@gmail.com";
+
+    const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [mobile, setMobile] = useState();
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://bbse-commerce.onrender.com/enquiry', {
+        name,
+        mail,
+        mobile,
+        message
+      });
+      toast.success(`Thank You for reaching out to us, We'll contact you shortly`);
+      console.log('received contact:', response.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); 
+      
+      // Handle success: show a success message or redirect if needed
+    } catch (error) {
+      console.error('Error receiving enquiry:', error);
+      toast.error('We received your request, thank you for contacting again');
+      // Handle error: show an error message or retry logic
+    }
+  };
   return (
     <>
+    <ToastContainer/>
     <section className="contact w-100 d-flex flex-column">
 	<div className="container">
 		<div className="story row position-relative">
@@ -65,15 +97,26 @@ export const Contact = () => {
                     <h2 className='ps-md-5'>Reason For Contacting</h2>
                     <p  className='ps-md-5 lead'>Our Team Will Contact You Shortly.</p>
                 </div>
-				<form className='pt-4'>
+				<form className='pt-4' onSubmit={handleSubmit}>
                     <div className='ps-md-5 d-flex flex-lg-row flex-column'>
-                        <input className='contentFromCustomer rounded-1 form-contorl w-50 w-lg-100 p-md-1 mb-lg-0 mb-1 fs-md-5' id='name' type='text' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
-                        placeholder='Name'></input>
-                        <input className='contentFromCustomer rounded-1 form-contorl w-75 w-lg-100 p-md-1 mb-lg-0 mb-1 fs-md-5' id='mobile' type='text' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }} placeholder='Mobile'></input>
-                        <input className='contentFromCustomer rounded-1 form-contorl w-sm-100 p-md-1 fs-md-5' id='mail' type='text' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }} placeholder='Mail'></input>
+                        <input className='contentFromCustomer rounded-1 form-contorl w-50 w-lg-100 p-md-1 mb-lg-0 mb-1 fs-md-5' type='text' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+                        id="name-input"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)} required></input>
+                        <input className='contentFromCustomer rounded-1 form-contorl w-75 w-lg-100 p-md-1 mb-lg-0 mb-1 fs-md-5'  type='text' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }} id="email-input"
+              placeholder="Mail"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)} required ></input>
+                        <input className='contentFromCustomer rounded-1 form-contorl w-sm-100 p-md-1 fs-md-5' type='number' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }} id="mobile-input"
+              placeholder="Mobile"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)} required></input>
                     </div>
                     <div className='px-md-5'>
-                        <textarea className=' contentFromCustomerTx px-3 mt-4 rounded-1 fs-5' cols={57} rows={5} placeholder='Message for us' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}></textarea>
+                        <textarea className=' contentFromCustomerTx px-3 mt-4 rounded-1 fs-5' cols={57} rows={5} placeholder='Message for us' id="message-input"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)} style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}></textarea>
                     </div>
                     <button className='form-contorl btn theme-btn ms-md-5 mt-3'>Send</button>
                 </form>

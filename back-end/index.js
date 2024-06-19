@@ -10,6 +10,7 @@ const Product = require("./models/productModel");
 const Review = require('./models/reviewModel');
 const Cart = require("./models/cartModel");
 const Subscriber = require('./models/subscribeModel'); 
+const Enquiry = require('./models/enquiryModel');
 const { MongoClient } = require('mongodb');
 const { uploadOnCloudinary } = require('./cloudinary');
 require("dotenv").config();
@@ -89,7 +90,7 @@ app.post('/subscribe', async (req, res) => {
   try {
     const { name, email,mobile } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
     // Check if email already exists in database
     const existingSubscriber = await Subscriber.findOne({ email });
 
@@ -115,6 +116,40 @@ app.post('/subscribe', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+app.post('/enquiry', async (req, res) => {
+  try {
+    const { name, mail,mobile,message } = req.body;
+
+    // console.log(req.body);
+    // Check if email already exists in database
+    const existingEnquiry = await Enquiry.findOne({ mail });
+
+    if (existingEnquiry) {
+      return res.status(400).json({ message: 'Email already on enquiry' });
+    }
+
+    // Create new subscriber instance
+    const newEnquiry = new Enquiry({
+      name,
+      mail,
+      mobile,
+      message
+    });
+
+    // Save subscriber to database
+    const savedEnquiry = await newEnquiry.save();
+
+    console.log(`New Enquiry: Name - ${name}, Email - ${mail}, Mobile - ${mobile}`);
+
+    res.status(200).json({ message: 'Enquiry received successful!', subscriber: savedEnquiry });
+  } catch (error) {
+    console.error('Error enquiring:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 //api for profile
 app.get("/profile", async (req, res) => {

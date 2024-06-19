@@ -10,7 +10,7 @@ export const Categories = () => {
     const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState();
-  console.log(mobile);
+//   console.log(mobile);
 
   const handleSubmit = async () => {
     try {
@@ -25,7 +25,7 @@ export const Categories = () => {
       // Handle success: show a success message or redirect if needed
     } catch (error) {
       console.error('Error subscribing:', error);
-      toast.error('User Already Exists. Please login.');
+      toast.error('You have already subscribed us, Thank You : )');
       // Handle error: show an error message or retry logic
     }
     toggleModal();
