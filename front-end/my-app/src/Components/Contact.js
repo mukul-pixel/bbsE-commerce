@@ -20,7 +20,7 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bbse-commerce.onrender.com/enquiry', {
+      const response = await axios.post('http://localhost:5000/enquiry', {
         name,
         mail,
         mobile,

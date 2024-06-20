@@ -117,17 +117,10 @@ app.post('/subscribe', async (req, res) => {
   }
 });
 
+// api to save enquiry
 app.post('/enquiry', async (req, res) => {
   try {
     const { name, mail,mobile,message } = req.body;
-
-    // console.log(req.body);
-    // Check if email already exists in database
-    const existingEnquiry = await Enquiry.findOne({ mail });
-
-    if (existingEnquiry) {
-      return res.status(400).json({ message: 'Email already on enquiry' });
-    }
 
     // Create new subscriber instance
     const newEnquiry = new Enquiry({
@@ -284,6 +277,45 @@ app.post("/addProduct", upload.array("images", 4), async (req, res) => {
             res.json({status:error})
         }
     })
+
+    //api to get all the enquiries for admin
+    app.get("/getEnquiry", async (req, res) => {
+      try {
+        const newEnquiries = await Enquiry.find({});
+    
+        // send the new enquiry data as response
+        res.json({ status: "ok", data: newEnquiries });
+      } catch (error) {
+        res.json({ status: "error", message: error.message });
+      }
+    });
+
+    //api to update the enquiry status
+
+    app.put("/updateEnquiryStatus/:enquiryId", async (req, res) => {
+      const enquiryId = req.params.enquiryId;
+      const { status } = req.body; // Correct destructuring
+    
+      try {
+        const enquiry = await Enquiry.findById(enquiryId);
+    
+        if (!enquiry) {
+          return res.status(404).json({ message: 'Enquiry not found' });
+        }
+    
+        // Update the enquiry status
+        enquiry.status = status;
+    
+        // Save the updated enquiry
+        const updatedEnquiry = await enquiry.save();
+    
+        res.status(200).json({ message: 'Enquiry status updated successfully', enquiry: updatedEnquiry });
+      } catch (error) {
+        res.status(500).json({ message: 'Error updating enquiry status', error: error.message });
+      }
+    });
+    
+    
 
     // api to get all users
     app.get("/getUsers", async (req,res)=>{
@@ -498,6 +530,8 @@ app.put('/edit/:productId', async (req, res) => {
       res.status(500).json({ message: 'Error updating product', error: error.message });
   }
 });
+
+
 
 app.listen(PORT,()=>{
     console.log(`your server is running at: ${PORT}`);

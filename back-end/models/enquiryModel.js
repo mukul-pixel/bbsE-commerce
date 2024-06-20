@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 
 const enquirySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  mail: { type: String, required: true, unique: true }, // Unique email constraint
-  mobile: { type: Number, required: true },
-  message: {
+    name: { type: String, required: true },
+    mail: { type: String, required: true},
+    mobile: { type: Number, required: true },
+    message: {
     type: String
+    },
+  status: {
+    type: String,
+    enum: ["new", "resolved", "in-process"],
+    default: "new"
   }
 });
 
-// Create Subscriber model based on schema
+// Create Enquiry model based on schema
 const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 module.exports = Enquiry;

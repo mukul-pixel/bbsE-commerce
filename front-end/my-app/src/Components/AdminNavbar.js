@@ -91,6 +91,25 @@ export const AdminNavbar = ({ children }) => {
                 </ul>
               </details>
             </li>
+            <li className="nav-item mb-2 px-2">
+              <details>
+                <summary className="mb-1">
+                  <FontAwesomeIcon className="px-2" icon={faBagShopping} />
+                  Enquiries
+                </summary>
+                <ul className="mb-2">
+                  {/* Dropdown menu items */}
+                  <li>
+                    <NavLink
+                      to="/enquiries"
+                      className="text-light text-decoration-none"
+                    >
+                      view enquiry
+                    </NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
             {/* <li className="nav-item mb-2 px-2">
               <details>
                 <summary className="mb-1">

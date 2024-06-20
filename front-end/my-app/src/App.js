@@ -16,6 +16,7 @@ import { AdminViewProduct } from "./Pages/AdminViewProduct";
 import { AdminViewUser } from "./Pages/AdminViewUser";
 import { Checkout } from "./Components/Checkout";
 import { UserProducts } from "./Pages/UserProducts";
+import { AdminEnquiries } from "./Pages/AdminEnquiries";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -60,6 +61,7 @@ function App() {
         <Route path="viewuser" element={<AdminViewUser/>}></Route>
         <Route path="checkout" element={<Checkout/>}></Route>
         <Route path="products" element={<UserProducts products={products}/>}></Route>
+        <Route path="enquiries" element={<AdminEnquiries/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
         </>
         {/* </>:
