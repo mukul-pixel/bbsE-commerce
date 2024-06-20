@@ -133,7 +133,7 @@ app.post('/enquiry', async (req, res) => {
     // Save subscriber to database
     const savedEnquiry = await newEnquiry.save();
 
-    console.log(`New Enquiry: Name - ${name}, Email - ${mail}, Mobile - ${mobile}`);
+    // console.log(`New Enquiry: Name - ${name}, Email - ${mail}, Mobile - ${mobile}`);
 
     res.status(200).json({ message: 'Enquiry received successful!', subscriber: savedEnquiry });
   } catch (error) {

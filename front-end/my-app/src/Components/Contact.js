@@ -20,7 +20,7 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/enquiry', {
+      const response = await axios.post('https://bbse-commerce.onrender.com/enquiry', {
         name,
         mail,
         mobile,
@@ -30,7 +30,7 @@ export const Contact = () => {
       console.log('received contact:', response.data);
       setTimeout(() => {
         window.location.reload();
-      }, 3000); 
+      }, 5000); 
       
       // Handle success: show a success message or redirect if needed
     } catch (error) {
