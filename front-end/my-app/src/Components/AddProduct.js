@@ -184,8 +184,8 @@ export const AddProduct = () => {
             >
               <option value="">Select a category</option>
               <option value="thread">Thread</option>
-              <option value="embellishments">Embellishments</option>
-              <option value="tools&accessories">Tools & Accessories</option>
+              <option value="embellishment">Embellishments</option>
+              <option value="toolsAndAccessories">Tools & Accessories</option>
               <option value="button">Button</option>
             </select>
           </div>
