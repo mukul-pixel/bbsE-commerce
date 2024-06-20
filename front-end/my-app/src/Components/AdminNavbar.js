@@ -8,12 +8,13 @@ import {
   // faWallet,
   faLandmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoImage from "../../src/images/dcd1ad97-eb2e-4bdf-afb2-aa66482dd1d3.svg";
 import axios from "axios";
 
 export const AdminNavbar = ({ children }) => {
   let sidebarOpen = true;
+  let navigate = useNavigate();
   const [formData,setFormData] = useState({});
   
   useEffect(() => {
@@ -33,6 +34,13 @@ export const AdminNavbar = ({ children }) => {
 
     fetchUserData(userId);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    navigate("/login");
+  };
   // const toggleSidebar = () => {
   //   setSidebarOpen(!sidebarOpen);
   // };
@@ -182,9 +190,9 @@ export const AdminNavbar = ({ children }) => {
                 <ul className="mb-2">
                   {/* Dropdown menu items */}
                   <li>
-                    <Link href="#" className="text-light text-decoration-none">
+                    <button onClick={handleLogout}  className="bg-black text-white border-0">
                       Logout
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </details>
