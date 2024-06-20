@@ -136,7 +136,7 @@ export const Products = () => {
                                 <details>
                                     <summary className="mb-1">Sub-Category</summary>
                                     <ul className="mb-2 list-unstyled ps-4 fs-6">
-                                        {['thread', 'button', 'canvas', 'roll', 'broch', 'lace', 'collar', 'chain', 'needle'].map((category) => (
+                                        {['thread', 'button', 'canvas', 'roll', 'broch','scissor', 'lace', 'collar', 'chain', 'needle'].map((category) => (
                                             <li key={category}>
                                                 <input type="checkbox" id={category} name="productSubCategory" onChange={handleCheckboxChange} />
                                                 <label htmlFor={category} className="text-dark ps-1">{category.charAt(0).toUpperCase() + category.slice(1)}</label>
