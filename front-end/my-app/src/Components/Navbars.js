@@ -149,8 +149,8 @@ export const Navbars = () => {
     {suggestions.map((suggestion, index) => (
       <li key={index} style={{ padding: '8px', cursor: 'pointer' }}>
         <Link to={`/productinfo/${suggestion._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          {suggestion.images[0]}
-          {suggestion.productName}
+          <img style={{height:"35px",width:"35px"}} src={suggestion.images[0]} alt="productImg"></img>
+          <span className='ms-3'>{suggestion.productName}</span>
         </Link>
       </li>
     ))}
