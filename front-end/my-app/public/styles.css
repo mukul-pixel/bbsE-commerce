@@ -698,3 +698,37 @@ input[type=submit] {
   background-size: cover;
 }
 
+/*Suggestion list*/
+
+.search-component {
+  position: relative;
+}
+
+.search-input-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: calc(80%); /* Adjust the value to control the distance from the input */
+  background-color: white;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
+

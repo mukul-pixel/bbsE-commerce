@@ -7,9 +7,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 // import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { About } from './About';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Contact } from './Contact';
 import { Products } from './Products';
+import axios from 'axios';
 
 
 
@@ -17,6 +18,32 @@ export const Navbars = () => {
   const [isLogin, setIsLogin] = useState(false);
   let navigate = useNavigate();
   // const token = localStorage.getItem('token');
+
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    if (query.length > 2) {
+      axios.get(`https://bbse-commerce.onrender.com/suggestions?q=${query}`)
+        .then(response => {
+          setSuggestions(response.data);
+          // console.log(response.data);
+          setShowSuggestions(true);
+        })
+        .catch(err => console.error(err));
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [query]);
+  
+
+  // const handleSuggestionClick = (suggestion) => {
+  //   setQuery(suggestion);
+  //   setShowSuggestions(false);
+
+  // };
 
    useEffect((handleLogout) => {
     const token = localStorage.getItem('token');
@@ -101,20 +128,36 @@ export const Navbars = () => {
             </a>
           </Nav>
           <form className="d-flex mx-auto me-md-3 my-md-0 my-2">
-            <input
-              className="form-control w-md-auto w-50 my-md-2 my-0 me-md-3 mx-1"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              style={{fontSize:"small"}}
-            />
-            <button
-              className="btn my-md-2 my-0 me-md-3 me-1"
-              type="submit"
-              style={{fontSize:"small"}}
-            >
-              Search
-            </button>
+      <input
+        className="form-control w-md-auto w-50 my-md-2 my-0 me-md-3 mx-1"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        style={{ fontSize: "small" }}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button
+        className="btn my-md-2 my-0 me-md-3 me-1"
+        type="submit"
+        style={{ fontSize: "small" }}
+      >
+        Search
+      </button>
+{showSuggestions && suggestions.length > 0 && (
+  <ul className="suggestions-list w-100" style={{ position: 'absolute', backgroundColor: 'white', border: '1px solid #ccc', listStyle: 'none', padding: 0, margin: 0, zIndex: 1 }}>
+    {suggestions.map((suggestion, index) => (
+      <li key={index} style={{ padding: '8px', cursor: 'pointer' }}>
+        <Link to={`/productinfo/${suggestion._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          {suggestion.images[0]}
+          {suggestion.productName}
+        </Link>
+      </li>
+    ))}
+  </ul>
+)}
+
+
             {isLogin ? (
   <>
     <button onClick={handleLogout} style={{fontSize:"small"}} className="btn theme-btn my-md-2 my-0 me-md-3 ">

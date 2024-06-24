@@ -142,6 +142,24 @@ app.post('/enquiry', async (req, res) => {
   }
 });
 
+//api for product suggestion
+app.get('/suggestions', async (req, res) => {
+  const query = req.query.q.toLowerCase();
+  try {
+    const allProducts = await Product.find({});
+
+    const suggestions = allProducts.filter(product =>
+      product.productName.toLowerCase().includes(query) ||
+      product.productCategory.toLowerCase().includes(query) ||
+      (product.productSubCategory && product.productSubCategory.toLowerCase().includes(query))
+    )
+
+    // console.log(suggestions);
+    res.json(suggestions);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 //api for profile
